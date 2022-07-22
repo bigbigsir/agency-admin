@@ -1,7 +1,28 @@
-@use "sass:math";
-@import "@/assets/scss/functions";
-
-.page {
+.login {
+  position: relative;
   height: 100%;
-  background: hsl(math.random(360) 50% 50% / 100%);
+  overflow: auto;
+  background: #f0f2f5 url("img/bg.png") no-repeat;
+  background-size: cover;
+
+  &__logo {
+    box-sizing: content-box;
+    height: 165px;
+    padding: 120px 0 40px;
+    overflow: hidden;
+    font-size: 0;
+    text-align: center;
+  }
+
+  &__content {
+    width: 368px;
+    margin: 0 auto;
+  }
+
+  &__lang {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+  }
 }

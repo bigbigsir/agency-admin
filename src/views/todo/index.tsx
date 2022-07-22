@@ -7,7 +7,6 @@ import { EntityId, nanoid } from '@reduxjs/toolkit'
 import { setToken } from '@/store/slice/token/actions'
 import { useNavigate } from 'react-router'
 import styles from './index.module.scss'
-import Header from '@/components/Header'
 
 function Index () {
   const todo = useAppSelector(state => state.todo)
@@ -30,7 +29,6 @@ function Index () {
 
   return (
     <div className={styles.page}>
-      <Header className={'css-transition-header'} meta={{ title: '代办' }}/>
       <div>
         {
           list.map(item => (

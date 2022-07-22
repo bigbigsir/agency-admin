@@ -115,7 +115,7 @@ gulp.task('minifyJs', minifyJs)
 gulp.task('copyJsToHtml', copyJsToHtml)
 gulp.task('removeAfterBuildingUnusedFile', removeAfterBuildingUnusedFile)
 gulp.task('minifyIndexJs', minifyIndexJs)
-gulp.task('minify', gulp.series(minifyIndexJs, copyJsToHtml, removeAfterBuildingUnusedFile), cb => cb())
+gulp.task('minify', gulp.series(/* minifyIndexJs, copyJsToHtml,  */removeAfterBuildingUnusedFile), cb => cb())
 
 // gulp.series：按照顺序执行replaceCDNPath, minifyHtml,
 // gulp.parallel：可以并行计算

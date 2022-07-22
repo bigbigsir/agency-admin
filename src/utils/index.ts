@@ -25,22 +25,3 @@ export function findMenuByPath<T, K extends keyof T> (menus: T[] = [], key: K, v
     if (item) return item as T
   }
 }
-
-/**
- * @description 获取当前设备平台
- */
-export function getPlatform () {
-  const u = navigator.userAgent
-  const isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
-  const isAndroid = !!~u.indexOf('Android') || !!~u.indexOf('Adr')
-  const isMobile = !!~~u.indexOf('Mobile')
-  if (isIOS) {
-    return 'ios'
-  } else if (isAndroid) {
-    return 'android'
-  } else if (isMobile) {
-    return 'mobile'
-  } else {
-    return 'pc'
-  }
-}

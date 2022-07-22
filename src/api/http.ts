@@ -4,8 +4,6 @@ import store from '@/store'
 import config from '@/config'
 import { RequestParams, ResponseData, CustomParams } from '@/api/types'
 import { getUuid } from '@/utils/depend'
-import { LoadingClass } from '@/components/Loading'
-import { message } from '@/components/Message'
 
 interface AppAxiosRequestConfig extends AxiosRequestConfig {
   customParams?: CustomParams
@@ -16,7 +14,6 @@ interface AppAxiosResponse extends AxiosResponse {
 }
 
 let requestIdList: string[] = []
-const loading = new LoadingClass()
 // 创建 axios 实例
 const _http = axios.create({
   timeout: 120 * 1000,
@@ -69,7 +66,6 @@ function request (config: AppAxiosRequestConfig) {
 
   if (customParams._isNeedLoading) {
     requestIdList.push(qid)
-    loading.show()
   }
 
   config.headers = {
@@ -117,16 +113,12 @@ function responseOnRejected (error: any) {
   if (config?.customParams._isNeedLoading) {
     closeLoading(config.headers.qid)
   }
-  message.error(error.message)
   console.log('response error:\n', error)
   return Promise.reject(error.message)
 }
 
 function closeLoading (qid?: any) {
   requestIdList = requestIdList.filter(item => item !== qid)
-  if (!requestIdList.length) {
-    loading.hide()
-  }
 }
 
 function get<T = ResponseData, P = RequestParams> (url: string, params?: RequestParams, config?: AxiosRequestConfig<P>) {

@@ -1,93 +1,164 @@
-@import "variables";
-@import "functions";
-@import "mixin";
+/* 覆盖 antd 默认样式 start
+------------------------------ */
+// 分页器
+.ant-select-single.ant-select-lg:not(.ant-select-customize-input) {
+  .ant-select-selector {
+    height: 32px;
 
-img[lazy="error"],
-img[lazy="loading"],
-img.swiper-lazy-loading {
-  position: absolute;
-  top: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  z-index: 1;
-  width: calc(21px + 1vmin) !important;
-  height: calc(21px + 1vmin) !important;
-  margin: auto;
-  background-color: transparent !important;
-  border: 2px solid #f5b607;
-  border-bottom-color: transparent;
-  border-radius: 100%;
-  animation: rotate 0.75s linear 0s infinite;
+    .ant-select-selection-item,
+    .ant-select-selection-placeholder {
+      line-height: 30px;
+    }
+  }
 }
 
-.clearfix {
-  zoom: 1;
+// 下拉框
+.ant-form-item-has-error {
+  .ant-input-group-addon {
+    .ant-select.ant-select-single:not(.ant-select-customize-input) {
+      .ant-select-selector {
+        background-color: inherit;
+        border: 1px solid transparent !important;
+      }
+    }
+  }
+}
 
-  &::after {
+.ant-pagination-options {
+  margin-right: 8px;
+
+  input {
+    text-align: center;
+  }
+}
+
+.ant-descriptions-view {
+  table {
+    border-collapse: collapse;
+  }
+}
+
+.ant-drawer-footer {
+  padding: 10px 16px;
+}
+
+// 表格多选框
+.ant-table-selection-column {
+  z-index: 3;
+}
+
+/* 覆盖 antd 默认样式 end
+------------------------------ */
+
+.common {
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 21, 41, 4%);
+
+  &__header {
+    padding: 14px 8px;
+
+    .ant-form-inline {
+      .ant-form-item:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__link-button {
+    & + & {
+      &::before {
+        position: relative;
+        top: -0.06em;
+        display: inline-block;
+        height: 0.9em;
+        margin: 0 8px;
+        vertical-align: middle;
+        content: "\20";
+        border-top: 0;
+        border-left: 1px solid #f0f0f0;
+      }
+    }
+  }
+
+  &__tree-select {
+    width: 100%;
+  }
+
+  &__filter-dropdown {
+    padding: 10px;
+  }
+
+  &__filter-input {
     display: block;
-    height: 0;
-    clear: both;
-    content: "\20";
+    width: 190px;
+    margin-bottom: 10px;
+  }
+
+  &__filter-space {
+    width: 100%;
+  }
+
+  // &__filter-button {
+  //   width: (190px - 10) / 2;
+  // }
+
+  &__editable-cell {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  &__descriptions {
+    .ant-descriptions-item-label {
+      width: 150px;
+      min-width: 150px;
+      padding-left: 0;
+      text-align: right;
+    }
+  }
+
+  &__descriptions-content {
+    word-break: break-all;
+    white-space: pre-line;
+  }
+
+  .ant-table-expanded-row-fixed {
+    padding: inherit;
+  }
+
+  .ant-table-body,
+  .ant-table-content {
+    // overflow: auto !important;
+  }
+
+  .ant-input-group.ant-input-group-compact {
+    display: flex;
   }
 }
 
-.border-top {
-  @include border-top;
-}
-
-.border-right {
-  @include border-right;
-}
-
-.border-bottom {
-  @include border-bottom;
-}
-
-.border {
-  @include border;
-}
-
-.button {
-  @include button;
-}
-
-.disabled-opacity {
-  @include disabled;
-}
-
-.c-primary {
-  color: $color-primary;
-}
-
-.c-gray {
-  color: $color-gray;
-}
-
-.monospaced-font {
-  font-family: "Helvetica Neue", "Microsoft YaHei", sans-serif;
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0);
+.common-modal {
+  .ant-modal-body {
+    max-height: 64vh;
+    overflow-y: auto;
   }
 
-  100% {
-    transform: rotate(360deg);
+  .ant-form-vertical {
+    .ant-form-item-label {
+      padding-bottom: 6px;
+    }
   }
 }
 
-.fade-common-enter-active,
-.fade-common-leave-active {
-  transition: opacity 0.3s ease;
+// 表格行内编辑，固定 middle 大小的输入框
+.editable-cell-value-wrap {
+  height: 32px;
+  padding: 0 11px;
+  line-height: 30px;
+  cursor: pointer;
+  border: 1px solid transparent;
 }
 
-.fade-common-enter,
-.fade-common-leave-to {
-  opacity: 0;
-}
-
-.swiper-pagination-bullet-active {
-  background-color: $color-primary;
+.ant-table-row:hover .editable-cell-value-wrap {
+  border-color: #d9d9d9;
+  border-radius: 4px;
 }

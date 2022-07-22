@@ -8,22 +8,12 @@
   <meta name="description" content="Web site created using create-react-app"/>
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png"/>
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json"/>
-  <title>React基础项目</title>
-  <script src="%PUBLIC_URL%/index.js"></script>
-  <script>window.init(<%= JSON.stringify(data) %>)</script>
+  <title>代理后台</title>
 </head>
 <body>
   <div id="root"></div>
   <% if (data.isEnvProduction) { %>
-    <% if (data.prerenderSpaPlugin){ %>
-      <script>
-        (function (prerenderRoutes) {
-          if (!prerenderRoutes.includes(window.location.pathname)) {
-            document.getElementById('root').innerHTML = ''
-          }
-        })(<%= JSON.stringify(data.prerenderRoutes) %>)
-      </script>
-    <% } %>
+
   <% }else { %>
 
   <% } %>

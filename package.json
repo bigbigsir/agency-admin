@@ -1,5 +1,5 @@
 {
-  "name": "react18",
+  "name": "agency-admin",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,6 +16,7 @@
     "@types/react-dom": "^18.0.5",
     "@types/uuid": "^8.3.4",
     "animate.css": "^4.1.1",
+    "antd": "^4.21.7",
     "axios": "^0.27.2",
     "babel-jest": "^27.4.2",
     "babel-loader": "^8.2.3",
@@ -50,6 +51,7 @@
     "react-app-polyfill": "^3.0.0",
     "react-dev-utils": "^12.0.1",
     "react-dom": "^18.2.0",
+    "react-intl": "^6.0.5",
     "react-redux": "^8.0.2",
     "react-refresh": "^0.11.0",
     "react-router-dom": "^6.3.0",

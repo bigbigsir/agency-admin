@@ -18,15 +18,6 @@ function getCacheState (): RootState {
   return state as RootState
 }
 
-export function asyncRestoreState (store: AppStore) {
-  setTimeout(function () {
-    store.dispatch({
-      type: '_asyncRestoreState',
-      payload: { token: 'token' }
-    })
-  }, 1000)
-}
-
 export function setCacheState (store: AppStore) {
   const state = store.getState()
   const cacheState = {} as Record<StateKey, RootState[StateKey]>

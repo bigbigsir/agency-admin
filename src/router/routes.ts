@@ -1,15 +1,14 @@
 import { ComponentType, lazy, LazyExoticComponent } from 'react'
 import { matchPath } from 'react-router-dom'
-import Header from '@/components/Header'
+import Layout from '@/components/Layout'
 
 const Page404 = lazy(() => import('@/components/Page404'))
 
 interface RouteParam {
   path: string
-  meta?: Readonly<{
-    title?: string
+  meta: Readonly<{
+    title: string
   }>
-  header?: ComponentType<any>
   element: ComponentType | LazyExoticComponent<ComponentType>
   children?: RouteParam[]
   /**
@@ -25,63 +24,33 @@ const routes: RouteParam[] = [
   {
     path: '/',
     meta: {
-      title: '首页'
+      title: ''
     },
     loginAuth: true,
-    header: Header,
-    element: lazy(() => import('../views/home'))
-  },
-  {
-    path: '/todo',
-    meta: {
-      title: '代办'
-    },
-    loginAuth: true,
-    element: lazy(() => import('../views/todo'))
-  },
-  {
-    path: '/counter',
-    meta: {
-      title: '计数'
-    },
-    loginAuth: true,
-    header: Header,
-    element: lazy(() => import('../views/counter')),
+    element: Layout,
     children: [
       {
-        path: '/counter/b',
+        path: '/',
         meta: {
-          title: '计数b'
+          title: '首页'
         },
-        header: Header,
-        element: lazy(() => import('../views/common'))
+        element: lazy(() => import('../views/home'))
       },
       {
-        path: '/counter/:id',
+        path: '/todo',
         meta: {
-          title: '计数a'
+          title: '代办'
         },
-        header: Header,
-        element: lazy(() => import('../views/common'))
+        element: lazy(() => import('../views/todo'))
+      },
+      {
+        path: '*',
+        meta: {
+          title: '404'
+        },
+        element: Page404
       }
     ]
-  },
-  {
-    path: '/test',
-    meta: {
-      title: '测试'
-    },
-    loginAuth: true,
-    header: Header,
-    element: lazy(() => import('../views/common'))
-  },
-  {
-    path: '*',
-    meta: {
-      title: '404'
-    },
-    loginAuth: true,
-    element: Page404
   },
   {
     path: '/login',
@@ -89,15 +58,7 @@ const routes: RouteParam[] = [
       title: '登录'
     },
     loginAuth: false,
-    element: lazy(() => import(/* webpackChunkName: "auth" */'../views/login'))
-  },
-  {
-    path: '/register',
-    meta: {
-      title: '注册'
-    },
-    loginAuth: false,
-    element: lazy(() => import(/* webpackChunkName: "auth" */'../views/register'))
+    element: lazy(() => import('../views/login'))
   }
 ]
 

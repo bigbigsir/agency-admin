@@ -1,18 +1,6 @@
 @use "sass:math";
 
 .page {
-  height: 100%;
-  background: hsl(math.random(360) 50% 50% / 100%);
-}
-
-.black {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100rem;
-  height: 100rem;
-  line-height: 100rem;
-  color: #fff;
-  text-align: center;
-  background: #000;
+  min-height: 100%;
+  background: hsl(math.random(360), 50%, 50%, 100%);
 }

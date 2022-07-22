@@ -33,6 +33,6 @@ module.exports = {
       SwitchCase: 1
     }],
     // 未使用的变量
-    'no-unused-vars': dev ? 'error' : 'error'
+    'no-unused-vars': dev ? 'warn' : 'error'
   }
 }

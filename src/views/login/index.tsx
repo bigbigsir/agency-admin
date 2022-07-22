@@ -1,39 +1,84 @@
-import React from 'react'
-import { useAppDispatch } from '@/store'
-import { getToken } from '@/store/slice/token/actions'
-import { useNavigate } from 'react-router'
-import * as api from './api'
+import React, { useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
+import { Button, Form, Input, Alert } from 'antd'
+import { Rule } from 'antd/es/form'
+import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import LangDropdown from '@/components/LangDropdown'
 import styles from './index.module.scss'
 
-function Component () {
-  const navigate = useNavigate()
-  const appDispatch = useAppDispatch()
+interface Values {
+  username: string
+  password: string
+}
 
-  function login () {
-    appDispatch(getToken())
-  }
+const Index: React.FC = () => {
+  const intl = useIntl()
 
-  function login1 () {
-    appDispatch(getToken()).then(() => {
-      navigate('/', { replace: true })
-    })
-  }
+  const [loading, setLoading] = useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = useState<string>()
 
-  function register () {
-    api.login().then(({ data, success }) => {
-      if (success) {
-        console.log(data)
-      }
-    }).finally(() => navigate('/register', { replace: true }))
+  const [form] = Form.useForm<Values>()
+  const usernameRule: Rule[] = [
+    {
+      required: true,
+      message: <FormattedMessage id={'required'}/>
+    }
+  ]
+  const passwordRule: Rule[] = [
+    {
+      required: true,
+      message: <FormattedMessage id={'required'}/>
+    }
+  ]
+
+  function onFinish (values: Values) {
+    setLoading(true)
+    setErrorMessage('123')
   }
 
   return (
-    <div className={styles.page}>
-      <button className={'button'} onClick={login}>登陆回记录页</button>
-      <button className={'button'} onClick={login1}>登陆回主页</button>
-      <button className={'button'} onClick={register}>注册</button>
+    <div className={styles.login}>
+      <Button className={styles.login__lang} type="text">
+        <LangDropdown/>
+      </Button>
+      <header className={styles.login__logo}>
+        <img src={require('./img/logo.png')} alt=""/>
+      </header>
+      <div className={styles.login__content}>
+        <Form
+          name="login"
+          size="large"
+          form={form}
+          onFinish={onFinish}>
+          {
+            errorMessage &&
+            <Form.Item className="Item">
+              <Alert message={errorMessage} type="error" showIcon/>
+            </Form.Item>
+          }
+          <Form.Item name="username" rules={usernameRule}>
+            <Input
+              prefix={<UserOutlined/>}
+              maxLength={50}
+              placeholder={intl.formatMessage({ id: 'login.username' })}/>
+          </Form.Item>
+          <Form.Item name="password" rules={passwordRule}>
+            <Input.Password
+              prefix={<LockOutlined/>}
+              maxLength={20}
+              placeholder={intl.formatMessage({ id: 'login.password' })}
+              visibilityToggle={false}
+              onPressEnter={() => form.submit()}/>
+          </Form.Item>
+          <Form.Item>
+            <Button loading={loading} type="primary" htmlType="submit" block>
+              {intl.formatMessage({ id: 'login.login' })}
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
     </div>
   )
 }
 
-export default Component
+export default Index
