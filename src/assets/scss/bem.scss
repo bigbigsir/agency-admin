@@ -1,0 +1,58 @@
+@import "functions";
+
+$element-separator: "__";
+$modifier-separator: "--";
+
+@mixin b($block) {
+  .#{$block} {
+    @content;
+  }
+}
+
+@mixin e($element) {
+  $selector: &; // css上下文
+  $separator: $element-separator, $modifier-separator, ".", ":", " ";
+
+  // @debug 'element=>' $selector;
+  // @debug '========>' get-block-selector($selector, $separator);
+
+  @if contains-modifier($selector, $separator) {
+    @at-root {
+      #{$selector} {
+        .#{get-block-selector($selector, $separator) + $element-separator + $element} {
+          @content;
+        }
+      }
+    }
+  } @else {
+    @at-root {
+      #{if($selector, $selector, ".") + $element-separator + $element} {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin m($modifier) {
+  $selector: &; // css上下文
+  $separator: $modifier-separator, ":", ".", " ";
+
+  // @debug 'modifier=>' $selector;
+  // @debug '=========>' getElementSelector($selector, $separator);
+
+  @if contains-modifier($selector, $separator) {
+    @at-root {
+      #{$selector} {
+        .#{get-element-selector($selector,$separator) + $modifier-separator + $modifier} {
+          @content;
+        }
+      }
+    }
+  } @else {
+    @at-root {
+      #{$selector + $modifier-separator + $modifier} {
+        @content;
+      }
+    }
+  }
+}

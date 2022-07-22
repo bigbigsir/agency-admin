@@ -1,0 +1,74 @@
+@import "src/assets/scss/variables";
+
+.css-transition-header {
+  position: sticky;
+  top: 0;
+}
+
+.css-transition-main {
+  height: calc(100% - $header-height);
+
+  &.no-header {
+    height: 100%;
+  }
+}
+
+.forward,
+.back {
+  &-enter,
+  &-exit {
+    position: fixed;
+    top: $header-height;
+    z-index: $route-transition-z-index;
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    will-change: transform;
+
+    &.no-header,
+    &.css-transition-header {
+      top: 0;
+    }
+  }
+
+  &-enter-active,
+  &-exit-active {
+    touch-action: none;
+
+    // transition: all 200ms ease-in-out;
+  }
+}
+
+.forward {
+  &-enter {
+    z-index: $route-transition-z-index + 1;
+    opacity: 0.6;
+    transform: translateX(30%);
+  }
+
+  &-enter-active {
+    opacity: 1;
+    transition: all 200ms ease-out;
+    transform: translateX(0);
+  }
+}
+
+.back {
+  &-exit {
+    z-index: $route-transition-z-index + 1;
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  &-exit-active {
+    opacity: 0;
+    transition: all 200ms ease;
+    transform: translateX(30%);
+  }
+}
+
+.none {
+  &-exit {
+    display: none;
+  }
+}

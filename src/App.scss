@@ -1,0 +1,26 @@
+@import "src/assets/scss/variables";
+
+.app {
+  position: relative;
+  max-width: var(--max-width);
+  height: 100%;
+  margin: 0 auto;
+  text-align: center;
+  background: #fff;
+
+  .button {
+    width: auto;
+    padding: 0 4px;
+    margin: 5px;
+
+    & + & {
+      margin-left: 10px;
+    }
+  }
+}
+
+.buttons {
+  position: fixed;
+  bottom: 0;
+  z-index: 3;
+}

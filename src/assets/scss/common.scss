@@ -1,0 +1,93 @@
+@import "variables";
+@import "functions";
+@import "mixin";
+
+img[lazy="error"],
+img[lazy="loading"],
+img.swiper-lazy-loading {
+  position: absolute;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  z-index: 1;
+  width: calc(21px + 1vmin) !important;
+  height: calc(21px + 1vmin) !important;
+  margin: auto;
+  background-color: transparent !important;
+  border: 2px solid #f5b607;
+  border-bottom-color: transparent;
+  border-radius: 100%;
+  animation: rotate 0.75s linear 0s infinite;
+}
+
+.clearfix {
+  zoom: 1;
+
+  &::after {
+    display: block;
+    height: 0;
+    clear: both;
+    content: "\20";
+  }
+}
+
+.border-top {
+  @include border-top;
+}
+
+.border-right {
+  @include border-right;
+}
+
+.border-bottom {
+  @include border-bottom;
+}
+
+.border {
+  @include border;
+}
+
+.button {
+  @include button;
+}
+
+.disabled-opacity {
+  @include disabled;
+}
+
+.c-primary {
+  color: $color-primary;
+}
+
+.c-gray {
+  color: $color-gray;
+}
+
+.monospaced-font {
+  font-family: "Helvetica Neue", "Microsoft YaHei", sans-serif;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.fade-common-enter-active,
+.fade-common-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-common-enter,
+.fade-common-leave-to {
+  opacity: 0;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: $color-primary;
+}

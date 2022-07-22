@@ -1,0 +1,18 @@
+@import "functions";
+
+$header-height: 50px !default;
+$color-primary: #cba351 !default;
+$color-white: #fff !default;
+$color-gray: #666 !default;
+$border-color-base: #3c3c3c !default;
+$border-color-button: $color-primary !default;
+$border-radius-base: 4px !default;
+$background-color-base: #141414 !default;
+$background-color-primary: #282828 !default;
+
+/* 层级变量定义
+*************/
+$route-transition-z-index: 1 !default;
+$dialog-z-index: 7 !default;
+$message-z-index: 8 !default;
+$loading-z-index: 9 !default;

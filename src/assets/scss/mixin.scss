@@ -1,0 +1,136 @@
+@use "sass:math";
+@import "variables";
+@import "functions";
+
+@mixin border-top($color:$border-color-base,$boolean:true) {
+  border-top: 1px solid $color;
+
+  @at-root (without: all) {
+    .hairlines & {
+      @if $boolean {
+        position: relative;
+      }
+
+      border-top: none;
+
+      &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        box-sizing: border-box;
+        height: 1px;
+        content: "\20";
+        background-color: $color;
+        border-top: 1px solid $color;
+        transform: scaleY(0.5);
+        transform-origin: 0 top;
+      }
+    }
+  }
+}
+
+@mixin border-right($color:$border-color-base,$boolean:true) {
+  border-right: 1px solid $color;
+
+  @at-root (without: all) {
+    .hairlines & {
+      @if $boolean {
+        position: relative;
+      }
+
+      border-right: none;
+
+      &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 2;
+        box-sizing: border-box;
+        width: 1px;
+        content: "\20";
+        background-color: $color;
+        border-right: 1px solid $color;
+        transform: scaleX(0.5);
+        transform-origin: 100% 0;
+      }
+    }
+  }
+}
+
+@mixin border-bottom($color:$border-color-base,$boolean:true) {
+  border-bottom: 1px solid $color;
+
+  @at-root (without: all) {
+    .hairlines & {
+      @if $boolean {
+        position: relative;
+      }
+
+      border-bottom: none;
+
+      &::after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 2;
+        box-sizing: border-box;
+        height: 1px;
+        content: "\20";
+        background-color: $color;
+        border-bottom: 1px solid $color;
+        transform: scaleY(0.5);
+        transform-origin: 0 bottom;
+      }
+    }
+  }
+}
+
+@mixin border($color:$border-color-button,$radius:$border-radius-base,$boolean:true) {
+  border: 1px solid $color;
+  border-radius: $radius;
+
+  @at-root (without: all) {
+    .hairlines & {
+      @if $boolean {
+        position: relative;
+      }
+
+      border: none;
+
+      &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 200%;
+        content: "\20";
+        border: 1px solid $color;
+        border-radius: if(math.unit($radius) == px, $radius * 2, $radius);
+        transform: scale(0.5, 0.5);
+        transform-origin: top left;
+      }
+    }
+  }
+}
+
+@mixin disabled($opacity:0.7) {
+  filter: alpha(opacity=$opacity * 100);
+  opacity: $opacity;
+}
+
+@mixin button($width:100%) {
+  width: $width;
+  height: 45px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 45px;
+  color: $color-white;
+  text-align: center;
+  letter-spacing: 1px;
+  background: $color-primary linear-gradient(45deg, $color-primary, #996b3d);
+  border-radius: $border-radius-base;
+}
