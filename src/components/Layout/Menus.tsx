@@ -1,7 +1,7 @@
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { Menu } from 'antd'
-import React, { useState } from 'react'
+import React from 'react'
 import scss from './index.module.scss'
 
 type MenuItem = Required<MenuProps>['items'][number];

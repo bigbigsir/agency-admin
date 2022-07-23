@@ -1,6 +1,6 @@
 import React from 'react'
 import { Dropdown, Menu, MenuProps } from 'antd'
-import { State, setLocale, getLocaleSelector } from '@/store/slice/locale'
+import { Locale, setLocale, getLocaleSelector } from '@/store/slice/locale'
 import { useDispatch, useSelector } from 'react-redux'
 import { TranslationOutlined } from '@ant-design/icons'
 
@@ -9,7 +9,7 @@ interface Props {
 }
 
 interface MenuItem {
-  key: State
+  key: Locale
   icon: string
   label: React.ReactNode
 }
@@ -37,7 +37,7 @@ const LangDropdown: React.FC<Props> = ({ className }) => {
   ]
 
   const onClick: MenuProps['onClick'] = ({ key }) => {
-    dispatch(setLocale(key as State))
+    dispatch(setLocale(key as Locale))
   }
 
   return (

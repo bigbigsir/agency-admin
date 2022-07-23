@@ -3,10 +3,8 @@ import { isObject } from '@/utils'
 
 type StateKey = keyof RootState
 
-const cacheName = 'react_redux_18'
+const cacheName = 'react_redux_cache'
 const stateKey: StateKey[] = [
-  'todo',
-  'route',
   'token'
 ]
 

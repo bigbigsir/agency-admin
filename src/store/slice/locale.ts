@@ -1,17 +1,17 @@
 import { createSlice, createSelector, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '@/store'
 
-type State = 'zh-CN' | 'ko-KR' | 'en-US'
+type Locale = 'zh-CN' | 'ko-KR' | 'en-US'
 
 const name = 'locale'
 
-const initialState: State = 'zh-CN' as State
+const initialState: Locale = 'zh-CN' as Locale
 
 const slice = createSlice({
   name,
   initialState,
   reducers: {
-    setLocale (state, action: PayloadAction<State>) {
+    setLocale (state, action: PayloadAction<Locale>) {
       return action.payload
     }
   }
@@ -26,5 +26,5 @@ export {
   setLocale,
   getLocaleSelector
 }
-export type { State }
+export type { Locale }
 export default slice

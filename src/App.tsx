@@ -2,8 +2,8 @@ import React from 'react'
 import 'moment/locale/zh-cn'
 import { ConfigProvider } from 'antd'
 import { IntlProvider } from 'react-intl'
-import { getLocaleSelector, State } from '@/store/slice/locale'
-import { Locale } from 'antd/es/locale-provider'
+import { getLocaleSelector, Locale } from '@/store/slice/locale'
+import { Locale as AntdLocale } from 'antd/es/locale-provider'
 import { useSelector } from 'react-redux'
 import Router from '@/router'
 import locales from '@/locales'
@@ -13,7 +13,7 @@ import antdKoKR from 'antd/es/locale/ko_KR'
 
 function App () {
   const locale = useSelector(getLocaleSelector)
-  const antdLocales: Record<State, Locale> = {
+  const antdLocales: Record<Locale, AntdLocale> = {
     'zh-CN': antdZhCN,
     'ko-KR': antdKoKR,
     'en-US': antdEnUS
