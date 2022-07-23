@@ -1,15 +1,22 @@
 import React from 'react'
+import { Result, Button } from 'antd'
 import { useNavigate } from 'react-router'
 
-function Component () {
+const Index: React.FC = () => {
   const navigate = useNavigate()
 
+  function backHome () {
+    navigate('/')
+  }
+
   return (
-    <div style={{ background: 'rgb(64,64,64)', height: '100%', overflow: 'auto' }}>
-      <h1>Page404</h1>
-      <button className={'button'} onClick={() => navigate('/', { replace: true })}>返回首页</button>
-    </div>
+    <Result
+      status="404"
+      title="404"
+      subTitle="Sorry, the page you visited does not exist."
+      extra={<Button onClick={backHome} type="primary">Back Home</Button>}
+    />
   )
 }
 
-export default Component
+export default Index

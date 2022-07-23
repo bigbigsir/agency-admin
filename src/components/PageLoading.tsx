@@ -1,11 +1,15 @@
 import React from 'react'
+import { Spin, Space } from 'antd'
 
-function Component () {
+export default function PageLoading () {
   return (
-    <div style={{ textAlign: 'center' }}>
-      <h4>loading...</h4>
+    <div style={{
+      paddingTop: 100,
+      textAlign: 'center'
+    }}>
+      <Space>
+        <Spin size="large"/>
+      </Space>
     </div>
   )
 }
-
-export default Component

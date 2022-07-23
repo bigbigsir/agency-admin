@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dropdown, Menu } from 'antd'
+import { Dropdown, Menu, MenuProps } from 'antd'
 import { State, setLocale, getLocaleSelector } from '@/store/slice/locale'
 import { useDispatch, useSelector } from 'react-redux'
 import { TranslationOutlined } from '@ant-design/icons'
@@ -8,7 +8,7 @@ interface Props {
   className?: string;
 }
 
-interface Language {
+interface MenuItem {
   key: State
   icon: string
   label: React.ReactNode
@@ -16,7 +16,9 @@ interface Language {
 
 const LangDropdown: React.FC<Props> = ({ className }) => {
   const dispatch = useDispatch()
-  const languages: Language[] = [
+  const locale = useSelector(getLocaleSelector)
+
+  const menuItems: MenuItem[] = [
     {
       key: 'zh-CN',
       label: <span>&nbsp;&nbsp;简体中文</span>,
@@ -33,14 +35,16 @@ const LangDropdown: React.FC<Props> = ({ className }) => {
       icon: '🇺🇸'
     }
   ]
-  const locale = useSelector(getLocaleSelector)
 
-  function onClick ({ key }: any) {
-    dispatch(setLocale(key))
+  const onClick: MenuProps['onClick'] = ({ key }) => {
+    dispatch(setLocale(key as State))
   }
 
   return (
-    <Dropdown overlay={<Menu onClick={onClick} items={languages} selectedKeys={[locale]}/>} placement="bottomRight">
+    <Dropdown
+      trigger={['hover', 'click']}
+      overlay={<Menu onClick={onClick} items={menuItems} selectedKeys={[locale]}/>}
+      placement="bottomRight">
       <div className={className}>
         <TranslationOutlined/>
       </div>

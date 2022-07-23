@@ -1,4 +1,5 @@
 import login from '@/views/login/locales/zh_CN'
+import layout from '@/components/Layout/locales/zh_CN'
 
 const base = {
   required: '请输入',
@@ -24,19 +25,13 @@ const base = {
   submit: '提交',
   refresh: '刷新',
   captcha: '验证码',
-  email: '邮箱',
-  sendEmail: '发送邮件',
-  channels: '官方频道',
-  onlineService: '在线客服',
-  'success.add': '添加成功',
-  'success.addTask': '任务添加成功',
-  'success.update': '更新成功',
-  'success.delete': '刪除成功'
+  email: '邮箱'
 }
 
 const zhCN = {
   ...base,
-  ...login
+  ...login,
+  ...layout
 }
 
 export default zhCN

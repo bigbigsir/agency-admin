@@ -1,32 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Layout } from 'antd'
-import classNames from 'classnames/bind'
 import Menus from '@/components/Layout/Menus'
-import SiteLogo from '@/components/Layout/SiteLogo'
-import { LayoutConfig, SiderWidth } from '@/components/Layout/index'
 import scss from './index.module.scss'
 
-interface SiderProps extends LayoutConfig {
-  sideWidth: SiderWidth
-}
+const Sider: React.FC = () => {
+  const cache = localStorage.getItem('collapsed') === 'true'
+  const [collapsed, setCollapsed] = useState<boolean>(cache)
 
-const cx = classNames.bind(scss)
-
-const Sider: React.FC<SiderProps> = (props) => {
-  const { sideWidth, siderTheme, collapsed } = props
+  useEffect(() => localStorage.setItem('collapsed', String(collapsed)), [collapsed])
 
   return (
     <Layout.Sider
-      width={sideWidth.width}
-      theme={siderTheme}
-      trigger={null}
+      width={210}
+      theme='dark'
       collapsed={collapsed}
-      className={cx('sider')}
+      className={scss.sider}
       collapsible
-      collapsedWidth={sideWidth.collapsedWidth}>
-      <SiteLogo {...props} theme={siderTheme}/>
-      {/* <Menus mode={'inline'} theme={siderTheme} collapsed={collapsed}/> */}
+      onCollapse={setCollapsed}
+      collapsedWidth={48}>
+      <div className={scss.site}>
+        <img className={scss.site__icon} src={require('@/assets/img/logo.png')} alt=""/>
+      </div>
+      <Menus/>
     </Layout.Sider>
   )
 }
+
 export default Sider

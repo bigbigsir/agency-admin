@@ -1,51 +1,5 @@
 /* 覆盖 antd 默认样式 start
 ------------------------------ */
-// 分页器
-.ant-select-single.ant-select-lg:not(.ant-select-customize-input) {
-  .ant-select-selector {
-    height: 32px;
-
-    .ant-select-selection-item,
-    .ant-select-selection-placeholder {
-      line-height: 30px;
-    }
-  }
-}
-
-// 下拉框
-.ant-form-item-has-error {
-  .ant-input-group-addon {
-    .ant-select.ant-select-single:not(.ant-select-customize-input) {
-      .ant-select-selector {
-        background-color: inherit;
-        border: 1px solid transparent !important;
-      }
-    }
-  }
-}
-
-.ant-pagination-options {
-  margin-right: 8px;
-
-  input {
-    text-align: center;
-  }
-}
-
-.ant-descriptions-view {
-  table {
-    border-collapse: collapse;
-  }
-}
-
-.ant-drawer-footer {
-  padding: 10px 16px;
-}
-
-// 表格多选框
-.ant-table-selection-column {
-  z-index: 3;
-}
 
 /* 覆盖 antd 默认样式 end
 ------------------------------ */
@@ -54,86 +8,6 @@
   background-color: #fff;
   border-radius: 2px;
   box-shadow: 0 0 2px rgba(0, 21, 41, 4%);
-
-  &__header {
-    padding: 14px 8px;
-
-    .ant-form-inline {
-      .ant-form-item:last-child {
-        margin-right: 0;
-      }
-    }
-  }
-
-  &__link-button {
-    & + & {
-      &::before {
-        position: relative;
-        top: -0.06em;
-        display: inline-block;
-        height: 0.9em;
-        margin: 0 8px;
-        vertical-align: middle;
-        content: "\20";
-        border-top: 0;
-        border-left: 1px solid #f0f0f0;
-      }
-    }
-  }
-
-  &__tree-select {
-    width: 100%;
-  }
-
-  &__filter-dropdown {
-    padding: 10px;
-  }
-
-  &__filter-input {
-    display: block;
-    width: 190px;
-    margin-bottom: 10px;
-  }
-
-  &__filter-space {
-    width: 100%;
-  }
-
-  // &__filter-button {
-  //   width: (190px - 10) / 2;
-  // }
-
-  &__editable-cell {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-  }
-
-  &__descriptions {
-    .ant-descriptions-item-label {
-      width: 150px;
-      min-width: 150px;
-      padding-left: 0;
-      text-align: right;
-    }
-  }
-
-  &__descriptions-content {
-    word-break: break-all;
-    white-space: pre-line;
-  }
-
-  .ant-table-expanded-row-fixed {
-    padding: inherit;
-  }
-
-  .ant-table-body,
-  .ant-table-content {
-    // overflow: auto !important;
-  }
-
-  .ant-input-group.ant-input-group-compact {
-    display: flex;
-  }
 }
 
 .common-modal {
@@ -147,18 +21,4 @@
       padding-bottom: 6px;
     }
   }
-}
-
-// 表格行内编辑，固定 middle 大小的输入框
-.editable-cell-value-wrap {
-  height: 32px;
-  padding: 0 11px;
-  line-height: 30px;
-  cursor: pointer;
-  border: 1px solid transparent;
-}
-
-.ant-table-row:hover .editable-cell-value-wrap {
-  border-color: #d9d9d9;
-  border-radius: 4px;
 }

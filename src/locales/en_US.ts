@@ -1,4 +1,5 @@
 import login from '@/views/login/locales/en_US'
+import layout from '@/components/Layout/locales/en_US'
 
 const base = {
   required: 'Please enter',
@@ -24,19 +25,13 @@ const base = {
   submit: 'Submit',
   refresh: 'Refresh',
   captcha: 'Captcha',
-  email: 'Email',
-  sendEmail: 'Send email',
-  channels: 'Channels',
-  onlineService: 'Online service',
-  'success.add': 'Add successfully',
-  'success.addTask': 'Task added successfully',
-  'success.update': 'Update successfully',
-  'success.delete': 'Delete successfully'
+  email: 'Email'
 }
 
 const enUS = {
   ...base,
-  ...login
+  ...login,
+  ...layout
 }
 
 export default enUS
