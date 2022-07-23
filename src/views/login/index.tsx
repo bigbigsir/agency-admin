@@ -5,6 +5,8 @@ import { Rule } from 'antd/es/form'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import LangDropdown from '@/components/LangDropdown'
 import styles from './index.module.scss'
+import { useDispatch } from 'react-redux'
+import { setToken } from '@/store/slice/token/actions'
 
 interface Values {
   username: string
@@ -13,6 +15,7 @@ interface Values {
 
 const Index: React.FC = () => {
   const intl = useIntl()
+  const dispatch = useDispatch()
 
   const [loading, setLoading] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>()
@@ -33,7 +36,9 @@ const Index: React.FC = () => {
 
   function onFinish (values: Values) {
     setLoading(true)
-    setErrorMessage('123')
+    setTimeout(() => {
+      dispatch(setToken('token'))
+    }, 1000)
   }
 
   return (

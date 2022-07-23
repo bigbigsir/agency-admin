@@ -25,7 +25,7 @@ const Sider: React.FC<SiderProps> = (props) => {
       collapsible
       collapsedWidth={sideWidth.collapsedWidth}>
       <SiteLogo {...props} theme={siderTheme}/>
-      <Menus mode={'inline'} theme={siderTheme} collapsed={collapsed}/>
+      {/* <Menus mode={'inline'} theme={siderTheme} collapsed={collapsed}/> */}
     </Layout.Sider>
   )
 }

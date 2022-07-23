@@ -1,30 +1,28 @@
-import { LocaleObject } from '@/locales/types'
-
-const tabs: LocaleObject = {
+const tabs = {
   'layout.tabs.closeOther': 'Close Others',
   'layout.tabs.closeLeft': 'Close All To The Left',
   'layout.tabs.closeRight': 'Close All To The Right',
   'layout.tabs.closeAll': 'Close All'
 }
 
-const header: LocaleObject = {
+const header = {
   'layout.header.refresh': 'Refresh',
   'layout.header.setting': 'Setting'
 }
 
-const userDropdown: LocaleObject = {
+const userDropdown = {
   'layout.userDropdown.center': 'User Center',
   'layout.userDropdown.password': 'Update Password',
   'layout.userDropdown.logout': 'Sign Out'
 }
 
-const componentSize: LocaleObject = {
+const componentSize = {
   'layout.componentSize.small': 'Small',
   'layout.componentSize.middle': 'Middle',
   'layout.componentSize.large': 'Large'
 }
 
-const settingDrawer: LocaleObject = {
+const settingDrawer = {
   'layout.settingDrawer.themeColor': 'Theme Color',
   'layout.settingDrawer.themeHeader': 'Theme Header',
   'layout.settingDrawer.dark': 'Dark',

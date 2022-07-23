@@ -5,14 +5,11 @@ import {
   LogoutOutlined,
   UnlockOutlined
 } from '@ant-design/icons'
-import { useHistory } from 'react-router'
-import { useDispatch, useSelector } from 'react-redux'
-import { State } from '@/store/types'
-import { ResponseData } from '@/api/types'
-import { signOut } from '@/store/actions/user'
-import { Avatar, Dropdown, Menu, message } from 'antd'
+import { useDispatch } from 'react-redux'
+import { Avatar, Dropdown, Menu } from 'antd'
 import { useIntl } from 'react-intl'
 import scss from '../index.module.scss'
+import { setToken } from '@/store/slice/token/actions'
 
 const cx = classNames.bind(scss)
 
@@ -22,31 +19,19 @@ interface Props {
 
 const UserDropdown: React.FC<Props> = ({ className }) => {
   const intl = useIntl()
-  const history = useHistory()
   const dispatch = useDispatch()
-  const username = useSelector<State, string>(state => state.userInfo?.username || '')
+  const username = '123'
 
   function logout ({ key }: any) {
     if (key === 'logout') {
-      dispatch<Promise<ResponseData>>(signOut()).then(({ success }) => {
-        if (success) {
-          message.success('退出成功')
-          history.push('/user/login')
-        }
-      })
+      dispatch(setToken(null))
     } else if (key === 'password') {
-      history.push('/updatePassword')
+      console.log('password')
     }
   }
 
   const menu = (
     <Menu onClick={logout} style={{ minWidth: 120 }}>
-      {/* <Menu.Item key="center"> */}
-      {/*  <UserOutlined/> */}
-      {/*  <span> */}
-      {/*    {intl.formatMessage({ id: 'layout.userDropdown.center' })} */}
-      {/*  </span> */}
-      {/* </Menu.Item> */}
       <Menu.Item key="password">
         <UnlockOutlined/>
         <span>

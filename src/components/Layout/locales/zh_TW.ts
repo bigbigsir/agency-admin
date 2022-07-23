@@ -1,30 +1,28 @@
-import { LocaleObject } from '@/locales/types'
-
-const tabs: LocaleObject = {
+const tabs = {
   'layout.tabs.closeOther': '關閉其他',
   'layout.tabs.closeLeft': '關閉左側',
   'layout.tabs.closeRight': '關閉右側',
   'layout.tabs.closeAll': '關閉全部'
 }
 
-const header: LocaleObject = {
+const header = {
   'layout.header.refresh': '刷新頁面',
   'layout.header.setting': '設置頁面'
 }
 
-const userDropdown: LocaleObject = {
+const userDropdown = {
   'layout.userDropdown.center': '個人中心',
   'layout.userDropdown.password': '修改密碼',
   'layout.userDropdown.logout': '退出登錄'
 }
 
-const componentSize: LocaleObject = {
+const componentSize = {
   'layout.componentSize.small': '小型',
   'layout.componentSize.middle': '中等',
   'layout.componentSize.large': '大型'
 }
 
-const settingDrawer: LocaleObject = {
+const settingDrawer = {
   'layout.settingDrawer.themeColor': '主題色',
   'layout.settingDrawer.themeHeader': '頭部風格',
   'layout.settingDrawer.dark': '暗色',
