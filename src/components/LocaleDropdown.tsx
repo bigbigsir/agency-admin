@@ -14,7 +14,7 @@ interface MenuItem {
   label: React.ReactNode
 }
 
-const LangDropdown: React.FC<Props> = ({ className }) => {
+const LocaleDropdown: React.FC<Props> = ({ className }) => {
   const dispatch = useDispatch()
   const locale = useSelector(getLocaleSelector)
 
@@ -42,7 +42,6 @@ const LangDropdown: React.FC<Props> = ({ className }) => {
 
   return (
     <Dropdown
-      trigger={['hover', 'click']}
       overlay={<Menu onClick={onClick} items={menuItems} selectedKeys={[locale]}/>}
       placement="bottomRight">
       <div className={className}>
@@ -52,4 +51,4 @@ const LangDropdown: React.FC<Props> = ({ className }) => {
   )
 }
 
-export default LangDropdown
+export default LocaleDropdown

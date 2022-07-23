@@ -3,10 +3,10 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { Button, Form, Input, Alert } from 'antd'
 import { Rule } from 'antd/es/form'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
-import LangDropdown from '@/components/LangDropdown'
-import styles from './index.module.scss'
+import LocaleDropdown from '@/components/LocaleDropdown'
 import { useDispatch } from 'react-redux'
 import { setToken } from '@/store/slice/token/actions'
+import styles from './index.module.scss'
 
 interface Values {
   username: string
@@ -44,7 +44,7 @@ const Index: React.FC = () => {
   return (
     <div className={styles.login}>
       <Button className={styles.login__lang} type="text">
-        <LangDropdown/>
+        <LocaleDropdown/>
       </Button>
       <header className={styles.login__logo}>
         <img src={require('./img/logo.png')} alt=""/>

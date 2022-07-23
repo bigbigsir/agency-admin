@@ -5,7 +5,9 @@ type StateKey = keyof RootState
 
 const cacheName = 'react_redux_cache'
 const stateKey: StateKey[] = [
-  'token'
+  'token',
+  'locale',
+  'currency'
 ]
 
 function getCacheState (): RootState {

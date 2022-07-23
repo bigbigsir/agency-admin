@@ -1,16 +1,18 @@
 import React from 'react'
-import { ReloadOutlined, NotificationOutlined } from '@ant-design/icons'
-import { Layout, Tooltip, Badge } from 'antd'
+import { ReloadOutlined } from '@ant-design/icons'
+import { Layout, Tooltip } from 'antd'
 import { useIntl } from 'react-intl'
-import LangDropdown from '@/components/LangDropdown'
+import LocaleDropdown from '@/components/LocaleDropdown'
 import UserDropdown from './UserDropdown'
+import CurrencyDropdown from './CurrencyDropdown'
+import MessageDropdown from './MessageDropdown'
 import scss from '../index.module.scss'
 
 interface HeaderProps {
   setContentKey: (key: string) => void
 }
 
-const Index: React.FC<HeaderProps> = (props) => {
+const Header: React.FC<HeaderProps> = (props) => {
   const { setContentKey } = props
   const intl = useIntl()
 
@@ -25,16 +27,13 @@ const Index: React.FC<HeaderProps> = (props) => {
             <ReloadOutlined/>
           </div>
         </Tooltip>
-        <div className={scss.header__action}>
-          <Badge size="small" count={5}>
-            <NotificationOutlined/>
-          </Badge>
-        </div>
-        <LangDropdown className={scss.header__action}/>
+        <MessageDropdown className={scss.header__action}/>
+        <CurrencyDropdown className={scss.header__action}/>
+        <LocaleDropdown className={scss.header__action}/>
         <UserDropdown className={scss.header__action}/>
       </div>
     </Layout.Header>
   )
 }
 
-export default Index
+export default Header

@@ -83,7 +83,7 @@
     "stylelint": "stylelint src/**/*.{css,less,scss,vue} --fix",
     "alllint": "run-s eslint stylelint -c",
     "lint-staged": "lint-staged",
-    "prepare": "husky install"
+    "postinstall": "husky install"
   },
   "eslintConfig": {
     "extends": [
