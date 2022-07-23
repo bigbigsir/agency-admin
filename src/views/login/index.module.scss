@@ -3,7 +3,7 @@
   height: 100%;
   overflow: auto;
   background: #f0f2f5 url("img/bg.png") no-repeat;
-  background-size: cover;
+  background-size: 100% auto;
 
   &__logo {
     box-sizing: content-box;

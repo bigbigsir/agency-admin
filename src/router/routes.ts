@@ -1,5 +1,4 @@
 import { ComponentType, lazy, LazyExoticComponent } from 'react'
-import { matchPath } from 'react-router-dom'
 import Layout from '@/components/Layout'
 
 const Page404 = lazy(() => import('@/components/Page404'))
@@ -62,17 +61,5 @@ const routes: RouteParam[] = [
   }
 ]
 
-function findRouteByPath (path: string, _routes: RouteParam[] = routes): RouteParam | void {
-  for (let i = 0, item; (item = _routes[i]); i++) {
-    if (matchPath(item.path, path)) {
-      return item
-    } else {
-      item = findRouteByPath(path, item.children || [])
-    }
-    if (item) return item
-  }
-}
-
 export type { RouteParam }
-export { findRouteByPath }
 export default routes

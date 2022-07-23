@@ -13,6 +13,7 @@ $header-height: 48px;
 .menu {
   flex: 1 1;
   overflow-y: auto;
+  overflow-y: overlay;
   overscroll-behavior: contain;
 }
 
