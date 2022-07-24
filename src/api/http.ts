@@ -3,7 +3,7 @@ import axios, { AxiosRequestHeaders, AxiosRequestConfig, AxiosResponse } from 'a
 import store from '@/store'
 import config from '@/config'
 import { RequestParams, ResponseData, CustomParams } from '@/api/types'
-import { getUuid } from '@/utils/depend'
+import { getUuidV1 } from '@/utils/depend'
 
 interface AppAxiosRequestConfig extends AxiosRequestConfig {
   customParams?: CustomParams
@@ -33,7 +33,7 @@ _http.interceptors.request.use(request, error => {
 _http.interceptors.response.use(response, responseOnRejected)
 
 function request (config: AppAxiosRequestConfig) {
-  const qid = getUuid()
+  const qid = getUuidV1()
   const state = store.getState()
   const token = state.token || ''
 

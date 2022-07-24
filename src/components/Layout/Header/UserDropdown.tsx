@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux'
 import { Avatar, Dropdown, Menu, MenuProps } from 'antd'
 import { useIntl } from 'react-intl'
 import { setToken } from '@/store/slice/token/actions'
+import { useNavigate } from 'react-router'
 import scss from '../index.module.scss'
 
 interface Props {
@@ -17,6 +18,7 @@ interface Props {
 const UserDropdown: React.FC<Props> = ({ className }) => {
   const intl = useIntl()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const username = '123'
 
   const menuItems = [
@@ -40,6 +42,7 @@ const UserDropdown: React.FC<Props> = ({ className }) => {
   const onClick: MenuProps['onClick'] = ({ key }) => {
     if (key === 'logout') {
       dispatch(setToken(null))
+      navigate('/login')
     } else if (key === 'password') {
       console.log('password')
     }

@@ -75,7 +75,7 @@ const CurrencyDropdown: React.FC<Props> = ({ className }) => {
       overlay={<Menu onClick={onClick} items={menuItems} selectedKeys={[currency]}/>}
       placement="bottomRight">
       <div className={className}>
-        <span style={{ fontSize: 14 }} className={'monospaced-font'}>
+        <span className={'monospaced-font'}>
           {currencyList.find(i => i.key === currency)?.currency}
         </span>
       </div>

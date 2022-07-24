@@ -1,9 +1,17 @@
-import { v1 as uuid } from 'uuid'
+import { v1, v4 } from 'uuid'
 
 /**
  * @description 获取uuid
  * @return string
  */
-export function getUuid () {
-  return uuid()
+export function getUuidV1 () {
+  return v1()
+}
+
+/**
+ * @description 获取uuid
+ * @return string
+ */
+export function getUuidV4 () {
+  return v4()
 }

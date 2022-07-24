@@ -1,10 +1,9 @@
 import React from 'react'
-import styles from './index.module.scss'
 
 function Index () {
   return (
-    <div className={styles.page}>
-      <h2>首页</h2>
+    <div>
+      <h2 style={{ textAlign: 'center' }}>{window.location.pathname}</h2>
     </div>
   )
 }

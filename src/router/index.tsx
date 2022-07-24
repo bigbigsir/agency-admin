@@ -3,14 +3,15 @@ import { createBrowserHistory } from 'history'
 import {
   Route,
   Routes,
+  Navigate,
   useLocation,
   unstable_HistoryRouter as HistoryRouter
 } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { getTokenSelector } from '@/store/slice/token'
-import PageLoading from '@/components/PageLoading'
 import routes, { RouteParam } from './routes'
+import PageLoading from '@/components/PageLoading'
 
 interface RenderProps extends RouteParam {
   child?: boolean
@@ -33,12 +34,11 @@ function createRoute (routes: RouteParam[], child?: boolean) {
 }
 
 function Render (props: RenderProps) {
-  const { meta, child, element: Element, loginAuth } = props
+  const { label, child, redirect, element: Component, loginAuth } = props
   const navigate = useNavigate()
   const location = useLocation()
   const loginStatus = useSelector(getTokenSelector)
 
-  const { title } = meta
   const { state, search, pathname } = location
   const toHome = loginStatus && loginAuth === false
   const toLogin = !loginStatus && !!loginAuth
@@ -59,11 +59,13 @@ function Render (props: RenderProps) {
   useEffect(checkAuth, [loginStatus, location])
 
   if (toHome || toLogin) return null
-  if (title) document.title = title
+  if (redirect) return <Navigate to={redirect}/>
+  if (!Component) return null
+  if (label) document.title = label
 
   return child
-    ? <Suspense fallback={<PageLoading/>}><Element/></Suspense>
-    : <Element/>
+    ? <Suspense fallback={<PageLoading/>}><Component/></Suspense>
+    : <Component/>
 }
 
 function Router () {
