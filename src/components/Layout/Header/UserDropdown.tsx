@@ -22,17 +22,17 @@ const UserDropdown: React.FC<Props> = ({ className }) => {
   const menuItems = [
     {
       key: 'password',
-      label: intl.formatMessage({ id: 'layout.userDropdown.password' }),
+      label: '修改密码',
       icon: <UnlockOutlined/>
     },
     {
       key: 'phone',
-      label: intl.formatMessage({ id: 'layout.userDropdown.password' }),
+      label: '修改电话',
       icon: <PhoneOutlined/>
     },
     {
       key: 'logout',
-      label: intl.formatMessage({ id: 'layout.userDropdown.logout' }),
+      label: '退出登录',
       icon: <LogoutOutlined/>
     }
   ]

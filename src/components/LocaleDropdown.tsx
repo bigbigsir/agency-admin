@@ -3,15 +3,14 @@ import { Dropdown, Menu, MenuProps } from 'antd'
 import { Locale, setLocale, getLocaleSelector } from '@/store/slice/locale'
 import { useDispatch, useSelector } from 'react-redux'
 import { TranslationOutlined } from '@ant-design/icons'
+import { ItemType } from 'antd/lib/menu/hooks/useItems'
 
 interface Props {
   className?: string;
 }
 
-interface MenuItem {
+type MenuItem = ItemType & {
   key: Locale
-  icon: string
-  label: React.ReactNode
 }
 
 const LocaleDropdown: React.FC<Props> = ({ className }) => {
@@ -21,18 +20,15 @@ const LocaleDropdown: React.FC<Props> = ({ className }) => {
   const menuItems: MenuItem[] = [
     {
       key: 'zh-CN',
-      label: <span>&nbsp;&nbsp;简体中文</span>,
-      icon: '🇨🇳'
+      label: <span>🇨🇳&nbsp;&nbsp;简体中文</span>
     },
     {
       key: 'ko-KR',
-      label: <span>&nbsp;&nbsp;한국어</span>,
-      icon: '🇰🇷'
+      label: <span>🇰🇷&nbsp;&nbsp;한국어</span>
     },
     {
       key: 'en-US',
-      label: <span>&nbsp;&nbsp;English</span>,
-      icon: '🇺🇸'
+      label: <span>🇺🇸&nbsp;&nbsp;English</span>
     }
   ]
 

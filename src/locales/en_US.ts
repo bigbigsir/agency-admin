@@ -1,5 +1,4 @@
 import login from '@/views/login/locales/en_US'
-import layout from '@/components/Layout/locales/en_US'
 
 const base = {
   required: 'Please enter',
@@ -30,8 +29,7 @@ const base = {
 
 const enUS = {
   ...base,
-  ...login,
-  ...layout
+  ...login
 }
 
 export default enUS

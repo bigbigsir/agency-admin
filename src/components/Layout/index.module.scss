@@ -99,6 +99,7 @@ $header-height: 48px;
     float: right;
     height: $header-height;
     overflow: hidden;
+    user-select: none;
   }
 
   &__action {
@@ -169,5 +170,11 @@ $header-height: 48px;
     border-top: 1px solid rgba(0, 0, 0, 6%);
     border-radius: 0 0 2px 2px;
     transition: all 0.3s;
+  }
+}
+
+.currency {
+  &__item {
+    margin: 5px 0;
   }
 }

@@ -1,5 +1,5 @@
 export default {
-  'login.username': '账号',
-  'login.password': '密碼',
-  'login.login': '登录'
+  'login.username': 'Account',
+  'login.password': 'Password',
+  'login.login': 'Sign in'
 }

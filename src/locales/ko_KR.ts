@@ -1,4 +1,4 @@
-import login from '@/views/login/locales/zh_CN'
+import login from '@/views/login/locales/ko_KR'
 
 const base = {
   required: '请输入',
@@ -27,9 +27,9 @@ const base = {
   email: '邮箱'
 }
 
-const zhCN = {
+const koKR = {
   ...base,
   ...login
 }
 
-export default zhCN
+export default koKR

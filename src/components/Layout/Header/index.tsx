@@ -9,7 +9,7 @@ import MessageDropdown from './MessageDropdown'
 import scss from '../index.module.scss'
 
 interface HeaderProps {
-  setContentKey: (key: string) => void
+  setContentKey: () => void
 }
 
 const Header: React.FC<HeaderProps> = (props) => {
@@ -22,14 +22,14 @@ const Header: React.FC<HeaderProps> = (props) => {
         盈樂貴賓會熱線1: +63 9999999999 盈樂貴賓會熱線2: +63 9888888888
       </div>
       <div className={scss.header__right}>
-        <Tooltip placement="bottom" title={intl.formatMessage({ id: 'layout.header.refresh' })}>
-          <div onClick={() => setContentKey(String(Date.now()))} className={scss.header__action}>
+        <Tooltip placement="bottom" title="刷新页面">
+          <div onClick={setContentKey} className={scss.header__action}>
             <ReloadOutlined/>
           </div>
         </Tooltip>
+        <LocaleDropdown className={scss.header__action}/>
         <MessageDropdown className={scss.header__action}/>
         <CurrencyDropdown className={scss.header__action}/>
-        <LocaleDropdown className={scss.header__action}/>
         <UserDropdown className={scss.header__action}/>
       </div>
     </Layout.Header>
