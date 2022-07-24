@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { AnyAction } from 'redux'
-import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux'
 import { ThunkAction } from 'redux-thunk'
+import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux'
 import cacheState, { setCacheState } from './state'
 import reducer from './reducer'
 
