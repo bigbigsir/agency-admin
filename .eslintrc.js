@@ -33,6 +33,8 @@ module.exports = {
       SwitchCase: 1
     }],
     // 未使用的变量
-    'no-unused-vars': dev ? 'warn' : 'warn'
+    'no-unused-vars': dev ? 'warn' : 'warn',
+    // promise reject 必须返回 new Error 格式
+    'prefer-promise-reject-errors': 'off'
   }
 }

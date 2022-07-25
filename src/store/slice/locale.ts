@@ -5,7 +5,9 @@ type Locale = 'zh-CN' | 'ko-KR' | 'en-US'
 
 const name = 'locale'
 
-const initialState: Locale = 'zh-CN' as Locale
+const locales: Locale[] = ['zh-CN', 'ko-KR', 'en-US']
+
+const initialState: Locale = locales.find(item => item.includes(navigator.language)) || 'zh-CN'
 
 const slice = createSlice({
   name,

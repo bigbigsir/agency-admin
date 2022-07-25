@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   LogoutOutlined,
   UnlockOutlined,
@@ -9,6 +9,8 @@ import { Avatar, Dropdown, Menu, MenuProps } from 'antd'
 import { useIntl } from 'react-intl'
 import { setToken } from '@/store/slice/token/actions'
 import { useNavigate } from 'react-router'
+import UpdatePassword from './updatePassword'
+import UpdatePhone from './updatePhone'
 import scss from '../index.module.scss'
 
 interface Props {
@@ -19,6 +21,7 @@ const UserDropdown: React.FC<Props> = ({ className }) => {
   const intl = useIntl()
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [visible, setVisible] = useState<Record<string, boolean>>({})
   const username = '123'
 
   const menuItems = [
@@ -44,17 +47,29 @@ const UserDropdown: React.FC<Props> = ({ className }) => {
       dispatch(setToken(null))
       navigate('/login')
     } else if (key === 'password') {
-      console.log('password')
+      setVisible({ password: true })
+    } else if (key === 'phone') {
+      setVisible({ phone: true })
     }
   }
 
   return (
-    <Dropdown overlay={<Menu onClick={onClick} items={menuItems}/>} placement="bottomRight">
-      <div className={className}>
-        <Avatar className={scss.header__avatar}>{username.substr(0, 1).toUpperCase()}</Avatar>
-        <span className={scss.header__username}>{username}</span>
-      </div>
-    </Dropdown>
+    <>
+      <Dropdown overlay={<Menu onClick={onClick} items={menuItems}/>} placement="bottomRight">
+        <div className={className}>
+          <Avatar className={scss.header__avatar}>{username.substr(0, 1).toUpperCase()}</Avatar>
+          <span className={scss.header__username}>{username}</span>
+        </div>
+      </Dropdown>
+      <UpdatePassword
+        visible={visible.password}
+        onCancel={() => setVisible({})}
+        onSuccess={() => setVisible({})}/>
+      <UpdatePhone
+        visible={visible.phone}
+        onCancel={() => setVisible({})}
+        onSuccess={() => setVisible({})}/>
+    </>
   )
 }
 

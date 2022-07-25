@@ -1,6 +1,0 @@
-@use "sass:math";
-
-.page {
-  min-height: 100%;
-  background: hsl(math.random(360), 50%, 50%, 100%);
-}
