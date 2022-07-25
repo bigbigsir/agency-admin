@@ -29,3 +29,5 @@ export type ApiFunctionReturnResponseData<T = any> =
 
 export type ApiFunctionReturnAxiosResponse<T = any> =
   (params?: RequestParams, config?: AxiosRequestConfig) => Promise<AxiosResponse<T>>
+
+export type { AxiosRequestConfig, AxiosResponse }

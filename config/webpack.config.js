@@ -90,16 +90,12 @@ const hasJsxRuntime = (() => {
 // 修改 css module class名生成规则 localIdentName
 // 添加 sass-loader additionalData 选项
 // 添加 optimization.splitChunks
-const config = require('../src/config')
 const version = require('../version')
 const htmlWebpackPluginOptions = {
   scriptLoading: 'blocking',
   templateParameters () {
     return {
-      isEnvProduction: process.env.NODE_ENV === 'production',
-      remDividedNumber: +process.env.REM_DIVIDED_NUMBER,
-      prerenderRoutes: config.prerenderRoutes,
-      prerenderSpaPlugin: process.env.PRERENDER_SPA_PLUGIN === 'true'
+      isEnvProduction: process.env.NODE_ENV === 'production'
     }
   }
 }
@@ -124,8 +120,6 @@ const versionHtmlWebpackPluginOptions = {
   }
 }
 const OpenBrowserPlugin = require('../webpack_plugins/compiled-after-open-browser')
-const remDivided = require('../webpack_plugins/postcss-plugin-rem-divided')
-const PrerenderSpaPlugin = require('prerender-spa-plugin-next')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 // ==== ↑ 项目自定义配置 ↑ ====
 
@@ -190,8 +184,7 @@ module.exports = function (webpackEnv) {
                 // Adds PostCSS Normalize as the reset css with default options,
                 // so that it honors browserslist config in package.json
                 // which in turn let's users customize the target behavior as per their needs.
-                'postcss-normalize',
-                [remDivided({ num: +process.env.REM_DIVIDED_NUMBER })]
+                'postcss-normalize'
               ]
               : [
                 'tailwindcss',
@@ -659,23 +652,6 @@ module.exports = function (webpackEnv) {
       // 打包文件大小分析插件
       process.env.BUNDLE_ANALYZER_PLUGIN === 'true' &&
       new BundleAnalyzerPlugin({ analyzerPort: process.env.PORT + 1 }),
-      // 预渲染插件
-      isEnvProduction &&
-      process.env.PRERENDER_SPA_PLUGIN === 'true' &&
-      new PrerenderSpaPlugin({
-        // 预渲染路由
-        routes: config.prerenderRoutes,
-        // 静态资源路径
-        staticDir: paths.appBuild,
-        rendererOptions: {
-          injectProperty: '__PRERENDER_INJECTED',
-          inject: {
-            inject: true
-          },
-          headless: true,
-          renderAfterTime: 500
-        }
-      }),
       // ==== ↑ 项目自定义配置 ↑ ====
       // Inlines the webpack runtime script. This script is too small to warrant
       // a network request.

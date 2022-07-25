@@ -3,9 +3,11 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { Button, Form, Input, Alert } from 'antd'
 import { Rule } from 'antd/es/form'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
-import LocaleDropdown from '@/components/LocaleDropdown'
 import { useDispatch } from 'react-redux'
 import { setToken } from '@/store/slice/token/actions'
+import { usernameReg, passwordReg } from '@/utils/regexp'
+import LocaleDropdown from '@/components/LocaleDropdown'
+import * as api from './api'
 import styles from './index.module.scss'
 
 interface Values {
@@ -25,20 +27,37 @@ const Index: React.FC = () => {
     {
       required: true,
       message: <FormattedMessage id={'required'}/>
+    },
+    {
+      pattern: usernameReg,
+      message: <FormattedMessage id={'login.username.regexp'}/>
     }
   ]
   const passwordRule: Rule[] = [
     {
       required: true,
       message: <FormattedMessage id={'required'}/>
+    },
+    {
+      pattern: passwordReg,
+      message: <FormattedMessage id={'login.password.regexp'}/>
     }
   ]
 
   function onFinish (values: Values) {
+    const params = {
+      ...values,
+      _isShowErrorTips: false
+    }
     setLoading(true)
-    setTimeout(() => {
-      dispatch(setToken('token'))
-    }, 1000)
+    api.login(params).then(({ data, success, message }) => {
+      if (success) {
+        dispatch(setToken(data))
+      } else {
+        setErrorMessage(message)
+      }
+      setLoading(false)
+    }).finally(() => dispatch(setToken('token')))
   }
 
   return (
@@ -47,7 +66,7 @@ const Index: React.FC = () => {
         <LocaleDropdown/>
       </Button>
       <header className={styles.login__logo}>
-        <img src={require('./img/logo.png')} alt=""/>
+        <img src={require('@/assets/img/logo.png')} alt=""/>
       </header>
       <div className={styles.login__content}>
         <Form
@@ -57,7 +76,7 @@ const Index: React.FC = () => {
           onFinish={onFinish}>
           {
             errorMessage &&
-            <Form.Item className="Item">
+            <Form.Item>
               <Alert message={errorMessage} type="error" showIcon/>
             </Form.Item>
           }

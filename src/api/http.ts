@@ -1,9 +1,10 @@
 import qs from 'qs'
 import axios, { AxiosRequestHeaders, AxiosRequestConfig, AxiosResponse } from 'axios'
+import { RequestParams, ResponseData, CustomParams } from '@/api/types'
 import store from '@/store'
 import config from '@/config'
-import { RequestParams, ResponseData, CustomParams } from '@/api/types'
-import { getUuidV1 } from '@/utils/depend'
+import { getUuidV4 } from '@/utils/depend'
+import { message as antdMessage } from 'antd'
 
 interface AppAxiosRequestConfig extends AxiosRequestConfig {
   customParams?: CustomParams
@@ -16,11 +17,8 @@ interface AppAxiosResponse extends AxiosResponse {
 let requestIdList: string[] = []
 // 创建 axios 实例
 const _http = axios.create({
-  timeout: 120 * 1000,
-  baseURL: config.apiUrl,
-  headers: {
-    AppId: '1'
-  }
+  timeout: 20 * 1000,
+  baseURL: config.apiUrl
 })
 
 // 添加请求拦截器
@@ -33,7 +31,7 @@ _http.interceptors.request.use(request, error => {
 _http.interceptors.response.use(response, responseOnRejected)
 
 function request (config: AppAxiosRequestConfig) {
-  const qid = getUuidV1()
+  const qid = getUuidV4()
   const state = store.getState()
   const token = state.token || ''
 
@@ -98,9 +96,11 @@ function response (response: AppAxiosResponse) {
   const needLoginCode = ['N_000003', 'N_000004', 'N_000015']
 
   const isTips = _isShowErrorTips && code !== _notShowErrorTipsCode && !~notTipsCode.indexOf(code)
+
   if (isTips) {
-    console.log(message)
+    antdMessage.error(message)
   }
+
   if (needLoginCode.includes(code)) {
     console.log('to login')
   }
@@ -113,7 +113,8 @@ function responseOnRejected (error: any) {
   if (config?.customParams._isNeedLoading) {
     closeLoading(config.headers.qid)
   }
-  console.log('response error:\n', error)
+  antdMessage.error(error.message)
+  // console.log('response error:\n', error)
   return Promise.reject(error.message)
 }
 
