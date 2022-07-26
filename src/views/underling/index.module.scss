@@ -1,0 +1,11 @@
+.page {
+  :global {
+    .ant-descriptions-item-label {
+      text-align: right;
+    }
+
+    .ant-card-head {
+      min-height: 46px;
+    }
+  }
+}

@@ -36,7 +36,7 @@ const menus: MenuItem[] = [
     label: '账号管理',
     children: [
       {
-        key: '/page1'
+        key: '/underling'
       },
       {
         key: '/page2'
@@ -81,14 +81,14 @@ const routes: RouteParam[] = [
     loginAuth: true,
     element: Layout,
     children: [
-      // {
-      //   path: '/',
-      //   redirect: '/page1'
-      // },
       {
-        path: '/page1',
+        path: '/',
+        redirect: '/underling'
+      },
+      {
+        path: '/underling',
         label: '下线管理',
-        element: lazy(() => import('../views/home'))
+        element: lazy(() => import('../views/underling'))
       },
       {
         path: '/page2',
