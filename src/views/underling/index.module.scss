@@ -1,11 +1,25 @@
 .page {
   :global {
     .ant-descriptions-item-label {
-      text-align: right;
+      // text-align: right;
     }
 
     .ant-card-head {
       min-height: 46px;
     }
+  }
+}
+
+.modal {
+  :global {
+    .ant-descriptions-item-label,
+    .ant-descriptions-item-content {
+      padding: 10px !important;
+    }
+  }
+
+  .arrow {
+    font-size: 20px;
+    text-align: center;
   }
 }

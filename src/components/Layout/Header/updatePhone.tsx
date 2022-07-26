@@ -44,10 +44,10 @@ function UpdatePhone (props: Props) {
         layout="vertical"
         onFinish={onFinish}>
         <Form.Item name="phone1" label="电话号码" rules={requiredRule}>
-          <Input maxLength={20} placeholder="8613800180000"/>
+          <Input maxLength={20} placeholder="例：8613800180000"/>
         </Form.Item>
-        <Form.Item name="phone2" label="备用电话号码" rules={requiredRule}>
-          <Input.Password maxLength={20} placeholder="8613800180000"/>
+        <Form.Item name="phone2" label="备用号码" rules={requiredRule}>
+          <Input maxLength={20} placeholder="例：8613800180000"/>
         </Form.Item>
       </Form>
     </Modal>

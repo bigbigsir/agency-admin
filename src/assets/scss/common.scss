@@ -1,5 +1,8 @@
 /* 覆盖 antd 默认样式 start
 ------------------------------ */
+p {
+  margin: 0;
+}
 
 /* 覆盖 antd 默认样式 end
 ------------------------------ */
@@ -18,11 +21,5 @@
   .ant-modal-body {
     max-height: 64vh;
     overflow-y: auto;
-  }
-
-  .ant-form-vertical {
-    .ant-form-item-label {
-      padding-bottom: 6px;
-    }
   }
 }

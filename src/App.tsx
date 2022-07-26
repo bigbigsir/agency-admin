@@ -24,7 +24,7 @@ function App () {
   }
 
   return (
-    <ConfigProvider componentSize={'middle'} locale={antdLocales[locale]}>
+    <ConfigProvider form={{}} componentSize={'middle'} locale={antdLocales[locale]}>
       <IntlProvider onError={onError} locale={locale} messages={locales[locale]}>
         <Router/>
       </IntlProvider>

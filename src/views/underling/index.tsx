@@ -6,6 +6,9 @@ import { DataNode, TreeProps } from 'antd/es/tree'
 import { PaginationProps } from 'antd/es/pagination'
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import { TableProps } from 'antd/lib/table/Table'
+import CreateForm from './components/CreateForm'
+import DepositForm from './components/DepositForm'
+import WithdrawalForm from './components/WithdrawalForm'
 import scss from './index.module.scss'
 import * as api from './api'
 
@@ -42,6 +45,7 @@ const treeData: DataNode[] = [
     ]
   }
 ]
+
 const Index: React.FC = () => {
   const [list, setList] = useState<ListItem[]>([])
   const [loading, setLoading] = useState<Record<string, boolean>>({})
@@ -55,14 +59,14 @@ const Index: React.FC = () => {
     showQuickJumper: true,
     showSizeChanger: true
   })
-
+  const [modalVisible, setModalVisible] = useState<Record<string, boolean>>({ deposit: true })
   const columns: ColumnsType<ListItem> = [
     {
       title: '下线会员号',
       dataIndex: 'menu'
     },
     {
-      title: '用户名',
+      title: '账户号',
       dataIndex: 'name'
     },
     {
@@ -96,6 +100,10 @@ const Index: React.FC = () => {
     }
   ]
 
+  function add () {
+    setModalVisible({ withdrawal: true })
+  }
+
   const onSelect: TreeProps['onSelect'] = (selectedKeys, info) => {
     console.log('selected', selectedKeys, info)
   }
@@ -106,7 +114,7 @@ const Index: React.FC = () => {
 
   return (
     <div className={'common ' + scss.page}>
-      <Descriptions size={'middle'} column={6} bordered>
+      <Descriptions size={'middle'} layout="vertical" column={6} bordered>
         <Descriptions.Item label="会员号">OK888888(tttttt)</Descriptions.Item>
         <Descriptions.Item label="币种">PHP</Descriptions.Item>
         <Descriptions.Item label="占成">5%</Descriptions.Item>
@@ -117,14 +125,14 @@ const Index: React.FC = () => {
         </Descriptions.Item>
       </Descriptions>
       <Space className={'common__toolbar'} size={'middle'}>
-        <Button onClick={() => null} type="primary" icon={<PlusOutlined/>}>
+        <Button onClick={add} type="primary" icon={<PlusOutlined/>}>
           新增下线
         </Button>
         <Form layout={'inline'}>
-          <Form.Item label="会员号">
+          <Form.Item label="下线会员号">
             <Input placeholder={'请输入'} maxLength={50}/>
           </Form.Item>
-          <Form.Item label="用户名">
+          <Form.Item label="账户号">
             <Input placeholder={'请输入'} maxLength={50}/>
           </Form.Item>
           <Button onClick={() => null} type="primary" icon={<SearchOutlined/>}>
@@ -158,6 +166,21 @@ const Index: React.FC = () => {
             onChange={onChange}/>
         </Layout.Content>
       </Layout>
+      <CreateForm
+        visible={modalVisible.create}
+        record={{}}
+        onCancel={() => setModalVisible({})}
+        onSuccess={() => setModalVisible({})}/>
+      <DepositForm
+        visible={modalVisible.deposit}
+        record={{}}
+        onCancel={() => setModalVisible({})}
+        onSuccess={() => setModalVisible({})}/>
+      <WithdrawalForm
+        visible={modalVisible.withdrawal}
+        record={{}}
+        onCancel={() => setModalVisible({})}
+        onSuccess={() => setModalVisible({})}/>
     </div>
   )
 }
