@@ -131,7 +131,7 @@ const ModalForm: React.FC<CreateFormProps> = (props) => {
         <Form.Item label="下线会员号">
           <span>laskwqke123</span>
         </Form.Item>
-        <Form.Item name="name1" label="账户号" rules={requiredRule}>
+        <Form.Item name="name" label="账户号" rules={requiredRule}>
           <Input maxLength={16} placeholder="6-20位数字或字母"/>
         </Form.Item>
         <Form.Item name="name2" label="账户昵称" rules={requiredRule}>

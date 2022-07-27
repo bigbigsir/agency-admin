@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { Descriptions, Tag, Space, Button, List, Input, Table, Layout, Card, Tree, Select } from 'antd'
+import { Descriptions, Tag, Space, Button, List, Divider, Table, Layout, Card, Tree, Select } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import { DataNode, TreeProps } from 'antd/es/tree'
 import { PaginationProps } from 'antd/es/pagination'
@@ -10,10 +10,10 @@ import CreateForm from './components/CreateForm'
 import DepositForm from './components/DepositForm'
 import WithdrawalForm from './components/WithdrawalForm'
 import RangesRangePicker from '@/components/RangesRangePicker'
+import NameInputGroup from '@/components/NameInputGroup'
 import scss from './index.module.scss'
 import * as api from './api'
 import moment from 'moment'
-import NameInputGroup from '@/components/NameInputGroup'
 
 interface ListItem {
   name: string
@@ -50,7 +50,8 @@ const treeData: DataNode[] = [
 ]
 
 const Index: React.FC = () => {
-  const [list, setList] = useState<ListItem[]>([])
+  const [list, setList] = useState<ListItem[]>([{ name: '123' }])
+  const [record, setRecord] = useState<ListItem>()
   const [loading, setLoading] = useState<Record<string, boolean>>({})
   const [pagination, setPagination] = useState<PaginationProps>({
     total: 0,
@@ -98,8 +99,20 @@ const Index: React.FC = () => {
     },
     {
       title: '操作',
-      width: 164,
-      dataIndex: 'key'
+      fixed: 'right',
+      width: 220,
+      dataIndex: 'key',
+      render (v, record) {
+        return <>
+          <a href='javascript:void 0;' onClick={() => update(record)}>修改</a>
+          <Divider type="vertical"/>
+          <a href="javascript:void 0;" onClick={() => deposit()}>存款</a>
+          <Divider type="vertical"/>
+          <a href="javascript:void 0;" onClick={() => withdrawal()}>取款</a>
+          <Divider type="vertical"/>
+          <a href="javascript:void 0;">提案归档</a>
+        </>
+      }
     }
   ]
 
@@ -107,11 +120,16 @@ const Index: React.FC = () => {
     setModalVisible({ create: true })
   }
 
-  function add1 () {
+  function update (record: ListItem) {
+    setRecord(record)
+    setModalVisible({ create: true })
+  }
+
+  function deposit () {
     setModalVisible({ deposit: true })
   }
 
-  function add2 () {
+  function withdrawal () {
     setModalVisible({ withdrawal: true })
   }
 
@@ -121,10 +139,6 @@ const Index: React.FC = () => {
 
   const onChange: TableProps<ListItem>['onChange'] = () => {
 
-  }
-
-  function asd (a: any, b: any) {
-    console.log(a, b)
   }
 
   return (
@@ -143,13 +157,6 @@ const Index: React.FC = () => {
         <Button onClick={add} type="primary" icon={<PlusOutlined/>}>
           新增下线
         </Button>
-        <Button onClick={add1} type="primary" icon={<PlusOutlined/>}>
-          存款
-        </Button>
-        <Button onClick={add2} type="primary" icon={<PlusOutlined/>}>
-          取款
-        </Button>
-        <RangesRangePicker onChange={asd}/>
         <NameInputGroup onChange={(p) => console.log(p)}/>
         <Button onClick={() => null} type="primary" icon={<SearchOutlined/>}>
           搜索
@@ -188,8 +195,8 @@ const Index: React.FC = () => {
         </Layout.Content>
       </Layout>
       <CreateForm
+        record={record}
         visible={modalVisible.create}
-        record={{}}
         onCancel={() => setModalVisible({})}
         onSuccess={() => setModalVisible({})}/>
       <DepositForm
