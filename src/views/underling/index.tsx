@@ -9,6 +9,7 @@ import { TableProps } from 'antd/lib/table/Table'
 import CreateForm from './components/CreateForm'
 import DepositForm from './components/DepositForm'
 import WithdrawalForm from './components/WithdrawalForm'
+import RangesRangePicker from '@/components/RangesRangePicker'
 import scss from './index.module.scss'
 import * as api from './api'
 
@@ -59,7 +60,7 @@ const Index: React.FC = () => {
     showQuickJumper: true,
     showSizeChanger: true
   })
-  const [modalVisible, setModalVisible] = useState<Record<string, boolean>>({ deposit: true })
+  const [modalVisible, setModalVisible] = useState<Record<string, boolean>>({})
   const columns: ColumnsType<ListItem> = [
     {
       title: '下线会员号',
@@ -101,6 +102,14 @@ const Index: React.FC = () => {
   ]
 
   function add () {
+    setModalVisible({ create: true })
+  }
+
+  function add1 () {
+    setModalVisible({ deposit: true })
+  }
+
+  function add2 () {
     setModalVisible({ withdrawal: true })
   }
 
@@ -110,6 +119,10 @@ const Index: React.FC = () => {
 
   const onChange: TableProps<ListItem>['onChange'] = () => {
 
+  }
+
+  function asd (a: any, b: any) {
+    console.log(a, b)
   }
 
   return (
@@ -128,6 +141,13 @@ const Index: React.FC = () => {
         <Button onClick={add} type="primary" icon={<PlusOutlined/>}>
           新增下线
         </Button>
+        <Button onClick={add1} type="primary" icon={<PlusOutlined/>}>
+          存款
+        </Button>
+        <Button onClick={add2} type="primary" icon={<PlusOutlined/>}>
+          取款
+        </Button>
+        <RangesRangePicker onChange={asd}/>
         <Form layout={'inline'}>
           <Form.Item label="下线会员号">
             <Input placeholder={'请输入'} maxLength={50}/>

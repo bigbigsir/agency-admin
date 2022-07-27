@@ -77,7 +77,7 @@ const ModalForm: React.FC<CreateFormProps> = (props) => {
       </Descriptions>
       <Divider/>
       <Form
-        name='deposit'
+        name='withdrawal'
         form={form}
         labelCol={{ span: 4 }}
         onFinish={onFinish}>

@@ -6,7 +6,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { useDispatch } from 'react-redux'
 import { setToken } from '@/store/slice/token/actions'
 import { usernameReg, passwordReg } from '@/utils/regexp'
-import LocaleDropdown from '@/components/LocaleDropdown'
+import LocaleDropdown from '@/components/Layout/Header/LocaleDropdown'
 import * as api from './api'
 import styles from './index.module.scss'
 

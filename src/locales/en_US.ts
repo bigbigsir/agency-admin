@@ -24,7 +24,12 @@ const base = {
   submit: 'Submit',
   refresh: 'Refresh',
   captcha: 'Captcha',
-  email: 'Email'
+  email: 'Email',
+  thisDay: 'This day',
+  thisWeek: 'This week',
+  thisMonth: 'This month',
+  lastWeek: 'Last week',
+  lastMonth: 'Last month'
 }
 
 const enUS = {

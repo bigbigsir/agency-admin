@@ -24,7 +24,12 @@ const base = {
   submit: '提交',
   refresh: '刷新',
   captcha: '验证码',
-  email: '邮箱'
+  email: '邮箱',
+  thisDay: '今日',
+  thisWeek: '本周',
+  thisMonth: '本月',
+  lastWeek: '上周',
+  lastMonth: '上月'
 }
 
 const zhCN = {
