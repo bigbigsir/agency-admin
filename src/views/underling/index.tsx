@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { Descriptions, Tag, Space, Button, Form, Input, Table, Layout, Card, Tree, Select } from 'antd'
+import { Descriptions, Tag, Space, Button, List, Input, Table, Layout, Card, Tree, Select } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import { DataNode, TreeProps } from 'antd/es/tree'
 import { PaginationProps } from 'antd/es/pagination'
@@ -165,9 +165,15 @@ const Index: React.FC = () => {
             />
           </Card>
           <Card size={'small'} className={scss.card} title="直属会员">
-            <p>直属会员1</p>
-            <p>直属会员1</p>
-            <p>直属会员1</p>
+            <List
+              size={'small'}
+              dataSource={['1', '2']}
+              renderItem={item => (
+                <List.Item>
+                  {item}
+                </List.Item>
+              )}
+            />
           </Card>
         </Layout.Sider>
         <Layout.Content>
