@@ -35,9 +35,9 @@ const NameInputGroup: React.FC<Props> = (props) => {
 
   return (
     <Input.Group compact>
-      <Select style={{ width: '35%' }} value={selected} options={options} onChange={SelectOnChange}
+      <Select value={selected} options={options} onChange={SelectOnChange}
         placeholder={intl.formatMessage({ id: 'placeholderInput' })}/>
-      <Input style={{ width: '65%' }} value={value} onChange={InputOnChange}
+      <Input style={{ width: 'auto' }} value={value} onChange={InputOnChange}
         placeholder={intl.formatMessage({ id: 'placeholderSelect' })}/>
     </Input.Group>
   )
