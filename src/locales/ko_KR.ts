@@ -29,7 +29,11 @@ const base = {
   thisWeek: '本周',
   thisMonth: '本月',
   lastWeek: '上周',
-  lastMonth: '上月'
+  lastMonth: '上月',
+  placeholderInput: '请输入',
+  placeholderSelect: '请选择',
+  memberNumber: '会员号',
+  accountNumber: '账户号'
 }
 
 const koKR = {

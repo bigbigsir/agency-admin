@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { Descriptions, Tag, Space, Button, Form, Input, Table, Layout, Card, Tree } from 'antd'
+import { Descriptions, Tag, Space, Button, Form, Input, Table, Layout, Card, Tree, Select } from 'antd'
 import { ColumnsType } from 'antd/es/table'
 import { DataNode, TreeProps } from 'antd/es/tree'
 import { PaginationProps } from 'antd/es/pagination'
@@ -12,6 +12,8 @@ import WithdrawalForm from './components/WithdrawalForm'
 import RangesRangePicker from '@/components/RangesRangePicker'
 import scss from './index.module.scss'
 import * as api from './api'
+import moment from 'moment'
+import NameInputGroup from '@/components/NameInputGroup'
 
 interface ListItem {
   name: string
@@ -148,17 +150,10 @@ const Index: React.FC = () => {
           取款
         </Button>
         <RangesRangePicker onChange={asd}/>
-        <Form layout={'inline'}>
-          <Form.Item label="下线会员号">
-            <Input placeholder={'请输入'} maxLength={50}/>
-          </Form.Item>
-          <Form.Item label="账户号">
-            <Input placeholder={'请输入'} maxLength={50}/>
-          </Form.Item>
-          <Button onClick={() => null} type="primary" icon={<SearchOutlined/>}>
-            搜索
-          </Button>
-        </Form>
+        <NameInputGroup onChange={(p) => console.log(p)}/>
+        <Button onClick={() => null} type="primary" icon={<SearchOutlined/>}>
+          搜索
+        </Button>
       </Space>
       <Layout>
         <Layout.Sider width={260} theme={'light'}>

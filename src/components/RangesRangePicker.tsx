@@ -5,11 +5,12 @@ import { RangePickerProps } from 'antd/es/date-picker'
 import { useIntl } from 'react-intl'
 
 interface Props {
+  value?: RangePickerProps['value']
   onChange: RangePickerProps['onChange']
 }
 
 const RangesRangePicker: React.FC<Props> = (props) => {
-  const { onChange } = props
+  const { value, onChange } = props
   const intl = useIntl()
   const ranges: RangePickerProps['ranges'] = {
     [intl.formatMessage({ id: 'thisDay' })]: [moment().startOf('day'), moment().endOf('day')],
@@ -21,6 +22,7 @@ const RangesRangePicker: React.FC<Props> = (props) => {
 
   return (
     <DatePicker.RangePicker
+      value={value}
       ranges={ranges}
       format="YYYY/MM/DD HH:mm:ss"
       showTime

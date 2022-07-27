@@ -29,7 +29,11 @@ const base = {
   thisWeek: 'This week',
   thisMonth: 'This month',
   lastWeek: 'Last week',
-  lastMonth: 'Last month'
+  lastMonth: 'Last month',
+  placeholderInput: 'Please enter',
+  placeholderSelect: 'Please select',
+  memberNumber: 'Member number',
+  accountNumber: 'Account number'
 }
 
 const enUS = {
