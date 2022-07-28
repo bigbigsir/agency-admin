@@ -4,6 +4,12 @@ p {
   margin: 0;
 }
 
+// table和list下的分页器边距重置
+.ant-table-pagination.ant-pagination,
+.ant-list-pagination {
+  margin: 16px 16px 16px 0;
+}
+
 /* 覆盖 antd 默认样式 end
 ------------------------------ */
 

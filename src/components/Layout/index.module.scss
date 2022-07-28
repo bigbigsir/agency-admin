@@ -168,7 +168,7 @@ $header-height: 48px;
     transition: all 0.3s;
 
     &:hover {
-      background-color: #e6f7ff;
+      background-color: var(--ant-primary-1);
     }
   }
 

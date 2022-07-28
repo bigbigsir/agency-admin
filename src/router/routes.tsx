@@ -39,10 +39,10 @@ const menus: MenuItem[] = [
         key: '/underling'
       },
       {
-        key: '/page2'
+        key: '/subAccount'
       },
       {
-        key: '/page3'
+        key: '/messages'
       }
     ]
   },
@@ -91,14 +91,14 @@ const routes: RouteParam[] = [
         element: lazy(() => import('../views/underling'))
       },
       {
-        path: '/page2',
+        path: '/subAccount',
         label: '子账号管理',
-        element: lazy(() => import('../views/home'))
+        element: lazy(() => import('../views/sub_account'))
       },
       {
-        path: '/page3',
-        label: '下线管理',
-        element: lazy(() => import('../views/home'))
+        path: '/messages',
+        label: '通知中心',
+        element: lazy(() => import('../views/messages'))
       },
       {
         path: '/page31',

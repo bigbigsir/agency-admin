@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
-import { Descriptions, Tag, Space, Button, List, Divider, Table, Card, Tree, Row, Col } from 'antd'
+import { SortOrder } from 'antd/es/table/interface'
+import { useIntl } from 'react-intl'
+import { Descriptions, Tag, Space, Button, Table } from 'antd'
 import { ColumnsType } from 'antd/es/table'
-import { DataNode, TreeProps } from 'antd/es/tree'
 import { PaginationProps } from 'antd/es/pagination'
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import { TableProps } from 'antd/lib/table/Table'
-import CreateForm from './components/CreateForm'
-import DepositForm from './components/DepositForm'
-import WithdrawalForm from './components/WithdrawalForm'
+import { paginationDefault } from '@/utils/hooks'
+import CreateForm from './CreateForm'
 import NameInputGroup from '@/components/NameInputGroup'
 import * as api from './api'
 import scss from './index.module.scss'
-import { SortOrder } from 'antd/es/table/interface'
-import { paginationDefault } from '@/utils/hooks'
 import { SorterResult } from 'antd/lib/table/interface'
 
 interface ListItem {
@@ -26,89 +23,60 @@ const Index: React.FC = () => {
   const [list, setList] = useState<ListItem[]>([])
   const [record, setRecord] = useState<ListItem>()
   const [filters, setFilters] = useState<Record<string, any>>({})
-  const [loading, setLoading] = useState<Record<string, boolean>>({})
-  const [treeData, setTreeData] = useState<DataNode[]>([
-    {
-      title: 'parent 1',
-      key: '0-0',
-      children: [
-        {
-          title: 'parent 1-0',
-          key: '0-0-0',
-          children: [
-            {
-              title: 'leaf',
-              key: '0-0-0-0'
-            },
-            {
-              title: 'leaf',
-              key: '0-0-0-1'
-            }
-          ]
-        },
-        {
-          title: 'parent 1-1',
-          key: '0-0-1',
-          children: [
-            { title: <span style={{ color: '#1890ff' }}>sss</span>, key: '0-0-1-0' }
-          ]
-        }
-      ]
-    }
-  ])
+  const [loading, setLoading] = useState<boolean>(false)
   const [sortOrder, setSortOrder] = useState<Record<string, SortOrder | undefined>>({ name: 'ascend' })
   const [pagination, setPagination] = useState<PaginationProps>(paginationDefault)
   const [modalVisible, setModalVisible] = useState<Record<string, boolean>>({})
 
   const columns: ColumnsType<ListItem> = [
     {
-      title: '下线会员号',
-      dataIndex: 'menu'
+      title: '子账号会员号',
+      dataIndex: 'name',
+      sorter: true,
+      sortOrder: sortOrder.name
     },
     {
-      title: '账户号',
-      dataIndex: 'name'
+      title: '子账号账户号',
+      dataIndex: 'name1'
     },
     {
-      title: '余额',
-      dataIndex: 'key'
-    },
-    {
-      title: '下线数',
-      dataIndex: 'key'
+      title: '账号状态',
+      dataIndex: 'status',
+      sorter: true,
+      sortOrder: sortOrder.status
     },
     {
       title: '联系电话',
       dataIndex: 'key'
     },
     {
-      title: '账号状态',
-      dataIndex: 'key'
-    },
-    {
-      title: '账号类型',
-      dataIndex: 'key'
+      title: '权限',
+      dataIndex: 'auth',
+      sorter: true,
+      sortOrder: sortOrder.auth
     },
     {
       title: '开户时间',
-      dataIndex: 'key'
+      dataIndex: 'create',
+      sorter: true,
+      sortOrder: sortOrder.create
+    },
+    {
+      title: '最后登录时间',
+      dataIndex: 'last',
+      sorter: true,
+      sortOrder: sortOrder.last
     },
     {
       title: '操作',
       fixed: 'right',
-      width: 220,
+      width: 100,
       dataIndex: 'key',
       render (v, record) {
         return <>
           <a onClick={() => update(record)}>
             {intl.formatMessage({ id: 'update' })}
           </a>
-          <Divider type="vertical"/>
-          <a onClick={() => deposit()}>存款</a>
-          <Divider type="vertical"/>
-          <a onClick={() => withdrawal()}>取款</a>
-          <Divider type="vertical"/>
-          <a>提案归档</a>
         </>
       }
     }
@@ -124,8 +92,8 @@ const Index: React.FC = () => {
       ...filters,
       ...options
     }
-    setLoading(state => ({ ...state, table: true }))
-    api.getUnderline(params).then(({ data, success }) => {
+    setLoading(true)
+    api.getSubAccount(params).then(({ data, success }) => {
       if (success) {
         setList(data)
         setSortOrder(params.sort)
@@ -135,7 +103,7 @@ const Index: React.FC = () => {
           current: data.page
         }))
       }
-      setLoading(state => ({ ...state, table: false }))
+      setLoading(false)
     }).finally(() => {
       const data = [
         {
@@ -147,13 +115,12 @@ const Index: React.FC = () => {
         }
       ]
       setList(data)
-      setLoading(state => ({ ...state, table: false }))
+      setLoading(false)
       setSortOrder(params.sort)
     })
   }
 
   function add () {
-    setRecord(undefined)
     setModalVisible({ create: true })
   }
 
@@ -162,22 +129,8 @@ const Index: React.FC = () => {
     setModalVisible({ create: true })
   }
 
-  function deposit () {
-    setRecord(record)
-    setModalVisible({ deposit: true })
-  }
-
-  function withdrawal () {
-    setRecord(record)
-    setModalVisible({ withdrawal: true })
-  }
-
   function nameOnchange (params: Record<string, string>) {
     setFilters(params)
-  }
-
-  const onSelect: TreeProps['onSelect'] = (selectedKeys, info) => {
-    console.log('selected', selectedKeys, info)
   }
 
   const onChange: TableProps<ListItem>['onChange'] = (pagination, filters, sorter) => {
@@ -202,58 +155,24 @@ const Index: React.FC = () => {
       </Descriptions>
       <Space className={'common__toolbar'} size={'middle'}>
         <Button onClick={add} type="primary" icon={<PlusOutlined/>}>
-          新增下线
+          新增子账号
         </Button>
         <NameInputGroup onChange={nameOnchange}/>
         <Button onClick={() => getList()} type="primary" icon={<SearchOutlined/>}>
           搜索
         </Button>
       </Space>
-      <Row>
-        <Col span={4}>
-          <Card size={'small'} className={scss.card} title="下线代理">
-            <Tree
-              treeData={treeData}
-              blockNode
-              onSelect={onSelect}
-            />
-          </Card>
-          <Card size={'small'} className={scss.card} title="直属会员">
-            <List
-              size={'small'}
-              dataSource={['1', '2']}
-              renderItem={item => (
-                <List.Item>
-                  {item}
-                </List.Item>
-              )}
-            />
-          </Card>
-        </Col>
-        <Col span={20}>
-          <Table
-            rowKey="id"
-            scroll={{ x: 1200 }}
-            loading={loading.table}
-            columns={columns}
-            dataSource={list}
-            pagination={pagination}
-            onChange={onChange}/>
-        </Col>
-      </Row>
+      <Table
+        rowKey="id"
+        scroll={{ x: 1200 }}
+        loading={loading}
+        columns={columns}
+        dataSource={list}
+        pagination={pagination}
+        onChange={onChange}/>
       <CreateForm
         record={record}
         visible={modalVisible.create}
-        onCancel={() => setModalVisible({})}
-        onSuccess={() => getList()}/>
-      <DepositForm
-        visible={modalVisible.deposit}
-        record={{}}
-        onCancel={() => setModalVisible({})}
-        onSuccess={() => getList()}/>
-      <WithdrawalForm
-        visible={modalVisible.withdrawal}
-        record={{}}
         onCancel={() => setModalVisible({})}
         onSuccess={() => getList()}/>
     </div>

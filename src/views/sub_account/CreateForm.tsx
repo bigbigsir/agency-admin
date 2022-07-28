@@ -1,15 +1,10 @@
-import React, {
-  useState,
-  useEffect
-} from 'react'
+import React, { useState, useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { Rule } from 'antd/es/form'
-import { ColumnsType } from 'antd/es/table'
-import { Modal, Form, Input, Radio, Checkbox, Descriptions, Divider, InputNumber, Table } from 'antd'
+import { Modal, Form, Input, Radio, Descriptions, Divider } from 'antd'
 import { passwordReg } from '@/utils/regexp'
-import { TableRowSelection } from 'antd/lib/table/interface'
-import * as api from '../api'
-import scss from '../index.module.scss'
+import * as api from './api'
+import scss from './index.module.scss'
 
 interface CreateFormProps {
   record?: any
@@ -49,42 +44,6 @@ const ModalForm: React.FC<CreateFormProps> = (props) => {
     }
   ]
 
-  const data: any = [
-    {
-      key: '1',
-      name: '5K~300K',
-      age: '5K~300K',
-      address: '5K~300K'
-    },
-    {
-      key: '2',
-      name: '5K~300K',
-      age: '5K~300K',
-      address: '5K~300K'
-    },
-    {
-      key: '3',
-      name: '5K~300K',
-      age: '5K~300K',
-      address: '5K~300K'
-    }
-  ]
-
-  const columns: ColumnsType<any> = [
-    {
-      title: '庄/闲',
-      dataIndex: 'name'
-    },
-    {
-      title: '和',
-      dataIndex: 'age'
-    },
-    {
-      title: '对子',
-      dataIndex: 'address'
-    }
-  ]
-
   useEffect(toggleVisible, [visible, record])
 
   function toggleVisible () {
@@ -96,13 +55,9 @@ const ModalForm: React.FC<CreateFormProps> = (props) => {
     setTitle(intl.formatMessage({ id: record ? 'update' : 'add' }))
   }
 
-  const rowSelectionOnChange: TableRowSelection<any>['onChange'] = (keys) => {
-    form.setFieldsValue({ new1: keys[0] })
-  }
-
   function onFinish (values: Record<string, any>) {
     setLoading(true)
-    api.addUnderline(values).then(({ success }) => {
+    api.addSubAccount(values).then(({ success }) => {
       if (success) {
         onCancel()
         onSuccess()
@@ -120,6 +75,7 @@ const ModalForm: React.FC<CreateFormProps> = (props) => {
       title={title}
       visible={visible}
       className={'common-modal ' + scss.modal}
+      forceRender
       maskClosable={false}
       confirmLoading={loading}
       onOk={() => form.submit()}
@@ -138,14 +94,14 @@ const ModalForm: React.FC<CreateFormProps> = (props) => {
         <Form.Item name="id" noStyle>
           <Input hidden type="text"/>
         </Form.Item>
-        <Form.Item label="下线会员号">
+        <Form.Item label="会员号">
           <span>laskwqke123</span>
         </Form.Item>
         <Form.Item name="name" label="账户号" rules={requiredRule}>
           <Input maxLength={16} placeholder="6-20位数字或字母"/>
         </Form.Item>
         <Form.Item name="name2" label="账户昵称" rules={requiredRule}>
-          <Input maxLength={16} placeholder={intl.formatMessage({ id: 'placeholderInput' })}/>
+          <Input maxLength={16} placeholder="账户昵称"/>
         </Form.Item>
         <Form.Item name="newPassword" label="密码" rules={passwordRule} validateFirst>
           <Input.Password maxLength={20} placeholder="6-20位数字或字母"/>
@@ -164,59 +120,21 @@ const ModalForm: React.FC<CreateFormProps> = (props) => {
         <Form.Item name="phone2" label="备用号码" rules={requiredRule}>
           <Input maxLength={20} placeholder="例：8613800180000"/>
         </Form.Item>
-        <Form.Item label="账号类型" required>
-          <Form.Item name="phone3" rules={requiredRule}>
-            <Radio.Group>
-              <Radio value={1}>下线代理</Radio>
-              <Radio value={2}>游戏会员</Radio>
-            </Radio.Group>
-          </Form.Item>
-          <Form.Item name="phone21" rules={requiredRule}>
-            <Checkbox.Group>
-              <Checkbox value={1}>禁用账号（停用代理网及游戏功能）</Checkbox>
-              <br/>
-              <Checkbox value={2}>同时禁用所有下线</Checkbox>
-            </Checkbox.Group>
-          </Form.Item>
-          <Form.Item name="phone2111" rules={requiredRule} noStyle>
-            <Checkbox.Group>
-              <Checkbox>禁用投注（停用游戏功能）</Checkbox>
-            </Checkbox.Group>
-          </Form.Item>
+        <Form.Item name="phone3" label="账号权限" rules={requiredRule}>
+          <Radio.Group>
+            <Radio value={1}>下线代理</Radio>
+            <Radio value={2}>游戏会员</Radio>
+          </Radio.Group>
         </Form.Item>
-        <Form.Item label='游戏条件' required>
-          <Form.Item>
-            <span>占成比 </span>
-            <Form.Item name="a123" rules={requiredRule} noStyle>
-              <InputNumber placeholder={intl.formatMessage({ id: 'placeholderInput' })}/>
-            </Form.Item>
-            <span> 上线 0%</span>
-          </Form.Item>
-          <Form.Item noStyle>
-            <span>洗码比 </span>
-            <Form.Item name="a2223" rules={requiredRule} noStyle>
-              <InputNumber placeholder={intl.formatMessage({ id: 'placeholderInput' })}/>
-            </Form.Item>
-            <span> 上线 1.45%</span>
-          </Form.Item>
-        </Form.Item>
-        <Form.Item label='投注限红' required>
-          <Form.Item name="new1" rules={requiredRule} noStyle>
-            <Input type='hidden' maxLength={20} placeholder="请输入"/>
-          </Form.Item>
-          <Table
-            bordered
-            rowSelection={{
-              type: 'radio',
-              onChange: rowSelectionOnChange
-            }}
-            columns={columns}
-            dataSource={data}
-            pagination={false}/>
+        <Form.Item name="phone22" label="账号状态" rules={requiredRule}>
+          <Radio.Group>
+            <Radio value={1}>启用</Radio>
+            <Radio value={2}>禁用</Radio>
+          </Radio.Group>
         </Form.Item>
         <Divider/>
         <Form.Item name="newPassword1" label="操作密码" rules={requiredRule}>
-          <Input.Password maxLength={20} placeholder={intl.formatMessage({ id: 'placeholderInput' })} visibilityToggle={false} onPressEnter={() => form.submit()}/>
+          <Input.Password maxLength={20} placeholder="请输入" visibilityToggle={false} onPressEnter={() => form.submit()}/>
         </Form.Item>
       </Form>
     </Modal>

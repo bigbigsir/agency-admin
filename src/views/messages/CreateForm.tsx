@@ -6,10 +6,9 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { Rule } from 'antd/es/form'
 import { ColumnsType } from 'antd/es/table'
 import { Modal, Form, Input, Radio, Checkbox, Descriptions, Divider, InputNumber, Table } from 'antd'
+import scss from './index.module.scss'
 import { passwordReg } from '@/utils/regexp'
 import { TableRowSelection } from 'antd/lib/table/interface'
-import * as api from '../api'
-import scss from '../index.module.scss'
 
 interface CreateFormProps {
   record?: any
@@ -101,24 +100,15 @@ const ModalForm: React.FC<CreateFormProps> = (props) => {
   }
 
   function onFinish (values: Record<string, any>) {
+    console.log(values)
     setLoading(true)
-    api.addUnderline(values).then(({ success }) => {
-      if (success) {
-        onCancel()
-        onSuccess()
-      }
-      setLoading(false)
-    }).finally(() => {
-      onCancel()
-      onSuccess()
-      setLoading(false)
-    })
   }
 
   return (
     <Modal
       title={title}
       visible={visible}
+      forceRender
       className={'common-modal ' + scss.modal}
       maskClosable={false}
       confirmLoading={loading}
@@ -145,7 +135,7 @@ const ModalForm: React.FC<CreateFormProps> = (props) => {
           <Input maxLength={16} placeholder="6-20位数字或字母"/>
         </Form.Item>
         <Form.Item name="name2" label="账户昵称" rules={requiredRule}>
-          <Input maxLength={16} placeholder={intl.formatMessage({ id: 'placeholderInput' })}/>
+          <Input maxLength={16} placeholder="账户昵称"/>
         </Form.Item>
         <Form.Item name="newPassword" label="密码" rules={passwordRule} validateFirst>
           <Input.Password maxLength={20} placeholder="6-20位数字或字母"/>
@@ -188,14 +178,14 @@ const ModalForm: React.FC<CreateFormProps> = (props) => {
           <Form.Item>
             <span>占成比 </span>
             <Form.Item name="a123" rules={requiredRule} noStyle>
-              <InputNumber placeholder={intl.formatMessage({ id: 'placeholderInput' })}/>
+              <InputNumber/>
             </Form.Item>
             <span> 上线 0%</span>
           </Form.Item>
           <Form.Item noStyle>
             <span>洗码比 </span>
             <Form.Item name="a2223" rules={requiredRule} noStyle>
-              <InputNumber placeholder={intl.formatMessage({ id: 'placeholderInput' })}/>
+              <InputNumber/>
             </Form.Item>
             <span> 上线 1.45%</span>
           </Form.Item>
@@ -216,7 +206,7 @@ const ModalForm: React.FC<CreateFormProps> = (props) => {
         </Form.Item>
         <Divider/>
         <Form.Item name="newPassword1" label="操作密码" rules={requiredRule}>
-          <Input.Password maxLength={20} placeholder={intl.formatMessage({ id: 'placeholderInput' })} visibilityToggle={false} onPressEnter={() => form.submit()}/>
+          <Input.Password maxLength={20} placeholder="请输入" visibilityToggle={false} onPressEnter={() => form.submit()}/>
         </Form.Item>
       </Form>
     </Modal>

@@ -4,6 +4,10 @@
       // text-align: right;
     }
 
+    .ant-card-bordered:last-child {
+      border-top: none;
+    }
+
     .ant-card-head {
       min-height: 46px;
     }

@@ -46,7 +46,6 @@ const ModalForm: React.FC<CreateFormProps> = (props) => {
     <Modal
       title='下线取款'
       visible={visible}
-      forceRender
       className={'common-modal ' + scss.modal}
       maskClosable={false}
       confirmLoading={loading}
