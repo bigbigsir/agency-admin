@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
-import { Tabs, List, Typography, Button, Divider, Col } from 'antd'
-import * as api from './api'
+import React from 'react'
+import { useIntl } from 'react-intl'
+import { Button, Divider } from 'antd'
 import scss from './index.module.scss'
-import { PlusOutlined, RollbackOutlined } from '@ant-design/icons'
-import NameInputGroup from '@/components/NameInputGroup'
+import { RollbackOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router'
+import * as api from './api'
 
 const Index: React.FC = () => {
   const intl = useIntl()
