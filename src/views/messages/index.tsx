@@ -5,13 +5,16 @@ import { PaginationProps } from 'antd/es/pagination'
 import { paginationDefault } from '@/utils/hooks'
 import * as api from './api'
 import scss from './index.module.scss'
+import { useNavigate } from 'react-router'
 
 interface ListItem {
+  id: number
   name: string,
   time: string
 }
 
 function MessageList ({ tab }: { tab: string }) {
+  const navigate = useNavigate()
   const [list, setList] = useState<ListItem[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [pagination, setPagination] = useState<PaginationProps>({
@@ -44,9 +47,11 @@ function MessageList ({ tab }: { tab: string }) {
     }).finally(() => {
       const data = [
         {
+          id: 1,
           name: '未读消息',
           time: '2020-05-07 13:55:01'
         }, {
+          id: 3,
           name: '未读消息',
           time: '2020-05-07 13:55:01'
         }
@@ -56,6 +61,10 @@ function MessageList ({ tab }: { tab: string }) {
     })
   }
 
+  function toDetails (item: ListItem) {
+    navigate('/messages/' + item.id)
+  }
+
   return (
     <List
       loading={loading}
@@ -63,7 +72,7 @@ function MessageList ({ tab }: { tab: string }) {
       dataSource={list}
       pagination={pagination}
       renderItem={item => (
-        <List.Item className={scss.message__item}>
+        <List.Item className={scss.message__item} onClick={() => toDetails(item)}>
           <List.Item.Meta
             title={item.name}
             description="2020-05-07 13:55:01"/>
@@ -78,7 +87,7 @@ const Index: React.FC = () => {
   const [tab, setTab] = useState<string>('unread')
 
   return (
-    <div className={['common', scss.page].join(' ')}>
+    <div className={'common ' + scss.page}>
       <Tabs defaultActiveKey={tab} centered onChange={e => setTab(e)}>
         <Tabs.TabPane tab="全部" key="all">
           <MessageList tab={tab}/>

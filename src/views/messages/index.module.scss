@@ -19,3 +19,31 @@
     }
   }
 }
+
+.details {
+  &__header {
+    position: relative;
+    padding-top: 24px;
+  }
+
+  &__button {
+    position: absolute;
+    top: 24px;
+    left: 8px;
+  }
+
+  &__title {
+    text-align: center;
+  }
+
+  &__time {
+    color: #666;
+    text-align: center;
+  }
+
+  &__content {
+    width: 50%;
+    padding: 20px 0;
+    margin: 0 auto;
+  }
+}

@@ -101,6 +101,11 @@ const routes: RouteParam[] = [
         element: lazy(() => import('../views/messages'))
       },
       {
+        path: '/messages/:id',
+        label: '通知中心',
+        element: lazy(() => import('../views/messages/details'))
+      },
+      {
         path: '/page31',
         label: '余额查询',
         element: lazy(() => import('../views/home'))
