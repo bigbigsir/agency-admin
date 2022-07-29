@@ -99,6 +99,7 @@ function copyJsToHtml (cb) {
 function removeAfterBuildingUnusedFile (cb) {
   const path = [
     'build/*.ejs',
+    'build/version.js',
     'build/index.js',
     'build/index.min.js'
   ]

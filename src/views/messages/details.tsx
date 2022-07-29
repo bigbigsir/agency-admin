@@ -1,9 +1,9 @@
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { Button, Divider } from 'antd'
-import scss from './index.module.scss'
 import { RollbackOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router'
+import scss from './index.module.scss'
 import * as api from './api'
 
 const Index: React.FC = () => {

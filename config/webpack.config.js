@@ -90,7 +90,7 @@ const hasJsxRuntime = (() => {
 // 修改 css module class名生成规则 localIdentName
 // 添加 sass-loader additionalData 选项
 // 添加 optimization.splitChunks
-const version = require('../version')
+const version = require('../public/version')
 const htmlWebpackPluginOptions = {
   scriptLoading: 'blocking',
   templateParameters () {
